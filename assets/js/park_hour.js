@@ -1,11 +1,12 @@
 var page = document.getElementById("page");
 var submitButton = document.getElementById("submit-button");
+var bldgInput = document.getElementById("building-input")
 submitButton.addEventListener('click', testInput);
 
 function testInput(parent) {
-  var bldgInput = document.getElementById("building-input").value;
+  var bldgInputResult = bldgInput.value;
   var resultBox = document.createElement('div');
-  resultBox.textContent = bldgInput;
+  resultBox.textContent = bldgInputResult;
   page.appendChild(resultBox);
   
 }
