@@ -256,9 +256,7 @@ code {
 
 .note {
   border-radius: 2px;
-  text-align: center;
-  display: flex;
-  align-items: center;
+  justify-content: center;
 }
 
 .note.weak::before {
