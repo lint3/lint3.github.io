@@ -255,8 +255,8 @@ code {
 
 
 .note {
-  border-radius: 2px;
-  justify-content: center;
+  border-radius: 6px;
+  text-align: center;
 }
 
 .note.weak::before {
