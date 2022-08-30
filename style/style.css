@@ -254,3 +254,27 @@ code {
 }
 
 
+.note {
+  border-radius: 2px;
+  width: 100%;
+  text-align: center;
+}
+
+.note.weak::before {
+  content: " [ i ] ";
+}
+
+.note.weak {
+  background-color: #E9E9E9;
+  border: 1px solid #DDDDDD;
+}
+
+.note.strong::before {
+  content: " [ ! ] ";
+}
+
+.note.strong {
+  background-color: #303030;
+  border: 1px solid #AF0000;
+}
+  
