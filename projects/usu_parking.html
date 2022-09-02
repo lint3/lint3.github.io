@@ -30,22 +30,28 @@
     
     <fieldset id="userinput">
       <legend>Choose Constraints:</legend>
-      <label for="building-input">Building:</label>
-      <input type="search" id="building-input" name="bldg">
+      <div>
+        <label for="building-input">Building:</label>
+        <input type="search" id="building-input" name="bldg">
+      </div>
       
-      <label for="parking-pass">USU parking pass (if any)</label>
-      <select name="pass" id="parking-pass">
-        <option value="none">None</option>
-        <option value="blue">Blue</option>
-        <option value="yellow">Yellow</option>
-        <option value="gray">Gray</option>
-        <option value="other">Other</option>
-      </select>
+      <div>
+        <label for="parking-pass">USU parking pass (if any)</label>
+        <select name="pass" id="parking-pass">
+          <option value="none">None</option>
+          <option value="blue">Blue</option>
+          <option value="yellow">Yellow</option>
+          <option value="gray">Gray</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
       
-      <input type="checkbox" id="rich" name="rich-textbox">
-      <label for="rich">Willing to pay?</label>
+      <div>
+        <input type="checkbox" id="rich" name="rich-textbox">
+        <label for="rich">Willing to pay?</label>
+      </div>
       
-      <input type="button" id="submit-button" value="Where do I park!?">
+      <div><input type="button" id="submit-button" value="Where do I park!?"></div>
     </fieldset>
     
     <div id="page">
