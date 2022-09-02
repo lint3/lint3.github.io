@@ -4,6 +4,7 @@ var submitButton = document.getElementById("submit-button");
 var bldgInput = document.getElementById("building-input")
 submitButton.addEventListener('click', testInput);
 
+
 function testInput(parent) {
   // var bldgInputResult = bldgInput.value;
   
@@ -20,6 +21,14 @@ function testInput(parent) {
     resultSection.textContent = "Result: Ride your bike to campus, then park it wherever you want for free!";
   }, 3000);
   
+}
+
+var buildings = Array("AGRS", "ASTE", "ARC" "AVAP", "BNR", "BSH", "CAINE", "BTEC", "CS", "CYNH", "DAVIS", "DCH", "EBLS", "EDUC", "ENGR",  "ENLAB", "FAC", "GEOL", "GREAV", "HPER", "HSS", "JONES", "LIB", "LILLY", "LUND", "MAIN", "MOEN", "RECYC", "RWST", "SER", "TECH", "TSC", "UAC", "VDL", "VSB");
+
+document.getElementById("randomize-building").addEventListener('click', randomizeBuilding);
+function randomizeBuilding(parent) {
+  var randomBuilding = buildings[Math.floor(Math.random() * buildings.length)];
+  document.getElementById("building-input").value = randomBuilding;
 }
 
 var map = L.map('map').setView([41.743, -111.810], 16);
