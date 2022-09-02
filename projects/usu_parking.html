@@ -30,8 +30,9 @@
       integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
       crossorigin=""></script>
     
-    <fieldset id="userinput">
+    <fieldset id="userinput" style="width: 50%;">
       <legend>Choose Constraints:</legend>
+      
       <div>
         <label for="building-input">Building Destination:</label>
         <input type="search" id="building-input" name="bldg">
@@ -49,11 +50,11 @@
       </div>
       
       <div>
+        <label for="rich">Free parking only</label>
         <input type="checkbox" id="rich" name="rich-textbox">
-        <label for="rich">  Willing to pay?</label>
       </div>
       
-      <div id="submit-button-wrapper" style="display: flex; height: 1.75em;">
+      <div id="submit-button-wrapper" style="display: flex; height: 1.75em; margin-top: 0.2em;">
         <input type="button" id="submit-button" value="Where do I park!?">
       </div>
     </fieldset>
