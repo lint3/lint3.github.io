@@ -12,11 +12,11 @@ function testInput(parent) {
   var loadingIcon = document.createElement('img');
   loadingIcon.setAttribute("id", "loading-icon");
   loadingIcon.setAttribute("src", "/assets/icons/loading.gif");
-  loadingIcon.setAttribute("style", "width: 1em; height: 1em;");
+  loadingIcon.setAttribute("style", "width: 1em; height: 1em; margin-left: 1em; margin-top: 0; padding: 1px 4px;");
   document.getElementById("submit-button-wrapper").appendChild(loadingIcon);
     
   setTimeout(function() {
-    resultSection.removeChild(document.getElementById("loading-icon"));
+    document.getElementById("submit-button-wrapper").removeChild(document.getElementById("loading-icon"));
     resultSection.textContent = "Result: Ride your bike to campus, then park it wherever you want for free!";
   }, 5000);
   
