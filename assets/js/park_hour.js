@@ -23,7 +23,7 @@ function testInput(parent) {
   
 }
 
-var buildings = Array("AGRS", "ASTE", "ARC" "AVAP", "BNR", "BSH", "CAINE", "BTEC", "CS", "CYNH", "DAVIS", "DCH", "EBLS", "EDUC", "ENGR",  "ENLAB", "FAC", "GEOL", "GREAV", "HPER", "HSS", "JONES", "LIB", "LILLY", "LUND", "MAIN", "MOEN", "RECYC", "RWST", "SER", "TECH", "TSC", "UAC", "VDL", "VSB");
+var buildings = Array("AGRS", "ASTE", "ARC", "AVAP", "BNR", "BSH", "CAINE", "BTEC", "CS", "CYNH", "DAVIS", "DCH", "EBLS", "EDUC", "ENGR", "ENLAB", "FAC", "GEOL", "GREAV", "HPER", "HSS", "JONES", "LIB", "LILLY", "LUND", "MAIN", "MOEN", "RECYC", "RWST", "SER", "TECH", "TSC", "UAC", "VDL", "VSB");
 
 document.getElementById("randomize-building").addEventListener('click', randomizeBuilding);
 function randomizeBuilding(parent) {
