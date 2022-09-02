@@ -10,12 +10,13 @@ function testInput(parent) {
   var loadingIcon = document.createElement('img');
   loadingIcon.setAttribute("id", "loading-icon");
   loadingIcon.setAttribute("src", "/assets/icons/loading.gif");
+  loadingIcon.setAttribute("style", "width: 1em; height: 1em;");
   resultSection.appendChild(loadingIcon);
     
   setTimeout(function() {
     resultSection.removeChild(document.getElementById("loading-icon"));
     resultSection.textContent = "Result: Ride your bike to campus, then park it wherever you want for free!";
-  }, 10);
+  }, 5000);
   
 }
 
