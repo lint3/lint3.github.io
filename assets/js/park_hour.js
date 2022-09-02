@@ -7,11 +7,13 @@ submitButton.addEventListener('click', testInput);
 function testInput(parent) {
   // var bldgInputResult = bldgInput.value;
   
+  resultSection.textContent = "";
+  
   var loadingIcon = document.createElement('img');
   loadingIcon.setAttribute("id", "loading-icon");
   loadingIcon.setAttribute("src", "/assets/icons/loading.gif");
   loadingIcon.setAttribute("style", "width: 1em; height: 1em;");
-  resultSection.appendChild(loadingIcon);
+  document.getElementById("submit-button-wrapper").appendChild(loadingIcon);
     
   setTimeout(function() {
     resultSection.removeChild(document.getElementById("loading-icon"));
