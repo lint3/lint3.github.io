@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restriction Builder</title>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/assets/favicon.ico">
+  
+    
+  </head>
+  <body class="dotted" id="notebook">
+    <nav class="navbar">
+      <a href="/index.html" class="logo">JC</a>
+      <a href="/index.html">Index</a>
+      <a href="/projects.html">Projects</a>
+      <a href="/trips.html">Trips</a>
+      <a href="/notes.html">Notes</a>
+      <a href="/about.html">Jacob</a>
+    </nav>
+  
+    <div id="restriction-form">
+      <div id="transportation-mode-wrapper">
+        <label for="transportation">Transportation Type</label>
+        <select name="transportation" id="transportation">
+          <option value="none">-- Pick One</option>
+          <option value="access">All</option>
+          <option value="foot">Foot</option>
+          <option value="bicycle">Bicycle</option>
+          <option value="motor_vehicle">Motor Vehicle</option>
+          <option value="dog">Dog</option>
+          <option value="horse">Horse</option>
+          <option value="ski">Ski</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      
+      <div id="restriction-type-wrapper">
+        <label for="restriction-type">Restriction Type</label>
+        <select name="restriction" id="restriction-type">
+          <option value="none">-- Pick One</option>
+          <option value="maxspeed">Speed Limit</option>
+          <option value="access">Access</option>
+          <option value="maxweight">Vehicle Weight</option>
+          <option value="oneway">One Way</option>
+          <option value="overtaking">Overtaking</option>
+          <option value="fee">Fee</option>
+          <option value="maxstay">Stay Duration</option>
+          <option value="restriction">Relation (turn)</option>
+        </select>
+      </div>
+      
+      <div id="restriction-type-details">
+        <div id="restriction-maxspeed-wrapper">
+          <input type="number" id="maxspeed" name="maxspeed">
+          <select name="maxspeed-unit" id="maxspeed-unit">
+            <option value="mph">MPH</option>
+            <option value="kph">KPH</option>
+          </select>
+        </div>
+        
+        <div id="restriction-access-wrapper">
+          
+        </div>
+        
+
+      </div>
+      
+    </div>
+    <div id="results">
+      <code></code><input type="button" id="clip" value="Copy to clipboard">
+    </div>
+    <script src="/assets/js/restriction.js"></script>
+    
+  </body>
+</html>
