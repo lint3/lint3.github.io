@@ -87,8 +87,9 @@
     
     
     <div class="form-outer" id="condition-form">
-      <div class="details-picker-outer" id="condition-type-wrapper">
-        <select name="condition-type">
+      <div class="type-picker-outer" id="condition-type-wrapper">
+        <label for="condition-type">Condition</label>
+        <select id="condition-type" name="condition-type">
           <option value="time">Time and/or Date</option>
           <option value="roadcondition">Road Condition</option>
           <option value="vehicleproperty">Vehicle Property</option>
@@ -100,21 +101,22 @@
       </div>
       
       <div class="details-picker-outer" id="condition-type-details">
+        Applies
         <div class="details-picker-inner" id="condition-time-wrapper">
           <div id="condition-month">
-            <input type="checkbox" name="month" id="condition-month">
+            <input type="checkbox" name="month" id="condition-month" checked>
             <label for="condition-month">Every Month</label>
           </div>
           <div id="condition-dayofweek">
-            <input type="checkbox" name="sevendays" id="condition-sevendays">
+            <input type="checkbox" name="sevendays" id="condition-sevendays" checked>
             <label for="condition-sevendays">Seven Days a Week</label>
           </div>
           <div id="condition-timeofday">
-            <input type="checkbox" name="allday" id="condition-allday">
+            <input type="checkbox" name="allday" id="condition-allday" checked>
             <label for="condition-allday">All Day</label>
           </div>
           <div id="condition-holidays">
-            <input type="checkbox" name="holidays" id="condition-holidays">
+            <input type="checkbox" name="holidays" id="condition-holidays" checked>
             <label for="condition-holidays">On Public Holidays</label>
           </div>
         </div>
@@ -133,7 +135,7 @@
     
     
     <div id="results">
-      <code></code><input type="button" id="clip" value="Copy to clipboard">
+      <code id="results-box"></code><input type="button" id="clip" value="Copy to clipboard">
     </div>
     <script src="/assets/js/restriction.js"></script>
     
