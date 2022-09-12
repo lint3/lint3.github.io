@@ -19,22 +19,25 @@
       <a href="/about.html">Jacob</a>
     </nav>
   
-    <div id="restriction-form">
-      <div id="transportation-mode-wrapper">
-        <label for="transportation">Transportation Type</label>
-        <select name="transportation" id="transportation">
-          <option value="none">-- Pick One</option>
-          <option value="access">All</option>
-          <option value="foot">Foot</option>
-          <option value="bicycle">Bicycle</option>
-          <option value="motor_vehicle">Motor Vehicle</option>
-          <option value="dog">Dog</option>
-          <option value="horse">Horse</option>
-          <option value="ski">Ski</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      
+  
+    <div id="transportation-form" style="border: 1px solid black;">
+      <label for="transportation">Transportation Type</label>
+      <select name="transportation" id="transportation">
+        <option value="none">-- Pick One</option>
+        <option value="access">All</option>
+        <option value="foot">Foot</option>
+        <option value="bicycle">Bicycle</option>
+        <option value="motor_vehicle">Motor Vehicle</option>
+        <option value="dog">Dog</option>
+        <option value="horse">Horse</option>
+        <option value="ski">Ski</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+  
+  
+    <div id="restriction-form" style="border: 1px solid black">
+
       <div id="restriction-type-wrapper">
         <label for="restriction-type">Restriction Type</label>
         <select name="restriction" id="restriction-type">
@@ -63,10 +66,71 @@
           
         </div>
         
-
+        <div id="restriction-weight-wrapper">
+          <input type="number" id="maxweight" name="maxweight">
+          <select name="maxweight-unit" id="maxweight-unit">
+            <option value="st">US Tons</option>
+            <option value="">Metric Tonnes</option>
+          </select>
+        </div>
+        
+        <div id="restriction-overtaking-wrapper">
+        
+        </div>
+        
+        <div id="restriction-fee-wrapper">
+          
+        </div>
+      </div>
+    </div>
+    
+    
+    <div id="condition-form" style="border: 1px solid black">
+      <div id="condition-type-wrapper">
+        <select name="condition-type">
+          <option value="time">Time and/or Date</option>
+          <option value="roadcondition">Road Condition</option>
+          <option value="vehicleproperty">Vehicle Property</option>
+          <option value="vehicleusage">Vehicle Usage</option>
+          <option value="usergroup">User Group</option>
+          <option value="accesspurpose">Purpose of Access</option>
+          <option value="stayduration">Stay Duration</option>
+        </select>
       </div>
       
+      <div id="condition-type-details">
+        <div id="condition-time-wrapper">
+          <div id="condition-month">
+            <input type="checkbox" name="month" id="condition-month">
+            <label for="condition-month">Every Month</label>
+          </div>
+          <div id="condition-dayofweek">
+            <input type="checkbox" name="sevendays" id="condition-sevendays">
+            <label for="condition-sevendays">Seven Days a Week</label>
+          </div>
+          <div id="condition-timeofday">
+            <input type="checkbox" name="allday" id="condition-allday">
+            <label for="condition-allday">All Day</label>
+          </div>
+          <div id="condition-holidays">
+            <input type="checkbox" name="holidays" id="condition-holidays">
+            <label for="condition-holidays">On Public Holidays</label>
+          </div>
+        </div>
+      </div>
     </div>
+
+      
+      
+      
+      
+      
+      
+    
+    
+    
+    
+    
     <div id="results">
       <code></code><input type="button" id="clip" value="Copy to clipboard">
     </div>
