@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restriction Builder</title>
     <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/syle/osm_restriction.css">
     <link rel="icon" href="/assets/favicon.ico">
   
     
@@ -20,7 +21,7 @@
     </nav>
   
   
-    <div id="transportation-form" style="border: 1px solid black;">
+    <div class="form-outer" id="transportation-form">
       <label for="transportation">Transportation Type</label>
       <select name="transportation" id="transportation">
         <option value="none">-- Pick One</option>
@@ -36,9 +37,9 @@
     </div>
   
   
-    <div id="restriction-form" style="border: 1px solid black">
+    <div class="form-outer" id="restriction-form">
 
-      <div id="restriction-type-wrapper">
+      <div class="type-picker-outer" id="restriction-type-wrapper">
         <label for="restriction-type">Restriction Type</label>
         <select name="restriction" id="restriction-type">
           <option value="none">-- Pick One</option>
@@ -53,8 +54,8 @@
         </select>
       </div>
       
-      <div id="restriction-type-details">
-        <div id="restriction-maxspeed-wrapper">
+      <div class="details-picker-outer" id="restriction-type-details">
+        <div class="details-picker-inner" id="restriction-maxspeed-wrapper">
           <input type="number" id="maxspeed" name="maxspeed">
           <select name="maxspeed-unit" id="maxspeed-unit">
             <option value="mph">MPH</option>
@@ -62,11 +63,11 @@
           </select>
         </div>
         
-        <div id="restriction-access-wrapper">
+        <div class="details-picker-inner" id="restriction-access-wrapper">
           
         </div>
         
-        <div id="restriction-weight-wrapper">
+        <div class="details-picker-inner" id="restriction-weight-wrapper">
           <input type="number" id="maxweight" name="maxweight">
           <select name="maxweight-unit" id="maxweight-unit">
             <option value="st">US Tons</option>
@@ -74,19 +75,19 @@
           </select>
         </div>
         
-        <div id="restriction-overtaking-wrapper">
+        <div class="details-picker-inner" id="restriction-overtaking-wrapper">
         
         </div>
         
-        <div id="restriction-fee-wrapper">
+        <div class="details-picker-inner" id="restriction-fee-wrapper">
           
         </div>
       </div>
     </div>
     
     
-    <div id="condition-form" style="border: 1px solid black">
-      <div id="condition-type-wrapper">
+    <div class="form-outer" id="condition-form">
+      <div class="details-picker-outer" id="condition-type-wrapper">
         <select name="condition-type">
           <option value="time">Time and/or Date</option>
           <option value="roadcondition">Road Condition</option>
@@ -98,8 +99,8 @@
         </select>
       </div>
       
-      <div id="condition-type-details">
-        <div id="condition-time-wrapper">
+      <div class="details-picker-outer" id="condition-type-details">
+        <div class="details-picker-inner" id="condition-time-wrapper">
           <div id="condition-month">
             <input type="checkbox" name="month" id="condition-month">
             <label for="condition-month">Every Month</label>
