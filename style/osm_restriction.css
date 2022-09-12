@@ -1,20 +1,24 @@
 .form-outer {
   border-radius: 4px;
   border: 4px solid black;
+  margin: 16px;
 }
 
 .type-picker-outer {
   border-radius: 4px;
   border: 2px solid black;
+  margin: 8px;
 }
 
 .details-picker-outer {
   border-radius: 4px;
   border: 1px solid black;
   background-color: #D2D2D2;
+  margin: 4px;
 }
 
 .details-picker-inner {
   border-radius: 4px;
   background-color: #E3E3E3;
+  margin: 4px;
 }
