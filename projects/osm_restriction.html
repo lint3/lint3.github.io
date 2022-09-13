@@ -22,8 +22,8 @@
   
   
     <div class="form-outer" id="transportation">
-      <label for="transportation">Transportation Type</label>
-      <select name="transportation-type-select" id="transportation">
+      <label for="transportation-type">Transportation Type</label>
+      <select name="transportation-type-select" id="transportation-type">
         <option value="">-- Pick One</option>
         <option value="access">All</option>
         <option value="foot">Foot</option>
@@ -119,6 +119,50 @@
             <input type="checkbox" name="holidays" id="condition-holidays" checked>
             <label for="condition-holidays">On Public Holidays</label>
           </div>
+        </div>
+        
+        <div class="details-picker-inner" id="condition-roadcondition-wrapper">
+          Only during
+          <div id="condition-roadcondition">
+            <select id="roadcondition" name="roadcondition">
+              <option value="wet">Wet</option>
+              <option value="snow">Snow</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="details-picker-inner" id="condition-vehicleproperty-wrapper">
+          <select id="vehicleproperty-key" name="vehicleproperty-key">
+            <option value="weight">Weight</option>
+            <option value="axleload">Axle Load</option>
+            <option value="length">Length</option>
+            <option value="width">Width</option>
+            <option value="height">Height</option>
+            <option value="wheels">Wheels</option>
+            <option value="draught">Draught (ships)</option>
+          </select> is <select id="vehicleproperty-ineq" name="vehicleproperty-ineq">
+            <option value="<">Less Than</option>
+            <option value="=">Equals</option>
+            <option value=">">More Than</option>
+            <option value="<=">At Most</option>
+            <option value=">=">At Least</option>
+          </select>
+          <input type="number" id="vehicleproperty-value">
+        </div>
+        
+        <div class="details-picker-inner" id="condition-vehicleusage-wrapper">
+        </div>
+        
+        <div class="details-picker-inner" id="condition-usergroup-wrapper">
+        
+        </div>
+        
+        <div class="details-picker-inner" id="condition-accesspurpose-wrapper">
+        
+        </div>
+        
+        <div class="details-picker-inner" id="condition-stayduration-wrapper">
+        
         </div>
       </div>
     </div>

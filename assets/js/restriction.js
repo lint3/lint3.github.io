@@ -182,7 +182,7 @@ function updatePickers() {
 
 function updateOutputString() {
   restrictionType = document.getElementById("restriction-type").value;
-  transportationMode = document.getElementById("transportation").value;
+  transportationMode = document.getElementById("transportation-type").value;
   direction = "";
   restrictionValue = "";
   
