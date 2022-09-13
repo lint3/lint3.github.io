@@ -172,10 +172,10 @@ function updatePickers() {
       correctDetailsPicker.style.display = "block";
     }
   }
-  // For every form-outer:
-    // Get value of type selector
-    // Hide all other children
-    // Show corresponding details-picker-inner
+}
+
+function updateOutputString() {
+  
 }
 
 // var submitButton = document.getElementById("submittags");
