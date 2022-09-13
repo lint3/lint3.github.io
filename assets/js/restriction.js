@@ -163,6 +163,16 @@ for (selects of document.querySelectorAll("select")) {
   selects.addEventListener('input', update);
 }
 
+document.getElementById("add-condition-button").addEventListener('click', addCondition);
+var numConditions = 1;
+
+function addCondition(e) {
+  cloneFrom = document.getElementsByClassName("condition");
+  cloneTo = cloneFrom.cloneNode(true);
+  document.getElementById("notebook").appendChild(cloneTo);
+  update();
+}
+
 function update(e) {
   updatePickers();
   updateOutputString();
