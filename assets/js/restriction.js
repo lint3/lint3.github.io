@@ -151,6 +151,12 @@ function parseOsmTags(chunk) {
 
 */
 
+var restrictionType = "";
+var transportationMode = "";
+var direction = "";
+var restrictionValue = "";
+var condition = [];
+
 for (selects of document.querySelectorAll("select")) {
   selects.addEventListener('input', update);
 }
@@ -175,7 +181,24 @@ function updatePickers() {
 }
 
 function updateOutputString() {
+  restrictionType = document.getElementById("restriction-type").value;
+  transportationMode = document.getElementById("transportation").value;
+  direction = "";
+  restrictionValue = "";
   
+  if (restrictionType != "") {
+    restrictionType = restrictionType + ":";
+  }
+  if (direction != "") {
+    direction = ":" + direction;
+  }
+  
+  finalString = restrictionType + transportationMode + direction + ":conditional = " + condition[0];
+  for (let i = 1; i < condition.length; i++) {
+    finalString = finalString + condition[i] + ";";
+  }
+  
+  document.getElementById("results-box").textContent = finalString;
 }
 
 // var submitButton = document.getElementById("submittags");
