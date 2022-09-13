@@ -198,6 +198,8 @@ function updateOutputString() {
   direction = "";
   restrictionValue = "";
   
+  
+  
   if (restrictionType != "") {
     restrictionType = restrictionType + ":";
   }
@@ -208,6 +210,10 @@ function updateOutputString() {
   finalString = restrictionType + transportationMode + direction + ":conditional = " + condition[0];
   for (let i = 1; i < condition.length; i++) {
     finalString = finalString + condition[i] + ";";
+  }
+  
+  if (restrictionType == "" || restrictionValue == "" || condition.length == 0) {
+    finalString = "Incomplete input";
   }
   
   document.getElementById("results-box").textContent = finalString;
