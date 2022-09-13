@@ -151,8 +151,9 @@ function parseOsmTags(chunk) {
 
 */
 
-var transportationPicker = document.getElementById("transportation");
-transportationPicker.addEventListener('input', update);
+for (selects of document.querySelectorAll("select")) {
+  selects.addEventListener('input', update);
+}
 
 function update(e) {
   updatePickers();
@@ -165,8 +166,11 @@ function updatePickers() {
     for (detailsPicker of form.getElementsByClassName("details-picker-inner")) {
       detailsPicker.style.display = "none";
     }
+    
     correctDetailsPicker = document.getElementById(form.id + "-" + myType + "-wrapper");
-    correctDetailsPicker.style.display = "block";
+    if (correctDetailsPicker == null {
+      correctDetailsPicker.style.display = "block";
+    }
   }
   // For every form-outer:
     // Get value of type selector
