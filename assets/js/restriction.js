@@ -157,6 +157,8 @@ var direction = "";
 var restrictionValue = "";
 var condition = [];
 
+update();
+
 for (selects of document.querySelectorAll("select")) {
   selects.addEventListener('input', update);
 }

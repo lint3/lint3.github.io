@@ -122,47 +122,70 @@
         </div>
         
         <div class="details-picker-inner" id="condition-roadcondition-wrapper">
-          Only during
           <div id="condition-roadcondition">
-            <select id="roadcondition" name="roadcondition">
-              <option value="wet">Wet</option>
-              <option value="snow">Snow</option>
+            Only when road is <select id="roadcondition" name="roadcondition">
+              <option value="wet">wet</option>
+              <option value="snow">snowy</option>
             </select>
           </div>
         </div>
         
         <div class="details-picker-inner" id="condition-vehicleproperty-wrapper">
-          <select id="vehicleproperty-key" name="vehicleproperty-key">
-            <option value="weight">Weight</option>
-            <option value="axleload">Axle Load</option>
-            <option value="length">Length</option>
-            <option value="width">Width</option>
-            <option value="height">Height</option>
-            <option value="wheels">Wheels</option>
-            <option value="draught">Draught (ships)</option>
+          Only vehicles with <select id="vehicleproperty-key" name="vehicleproperty-key">
+            <option value="weight">weight</option>
+            <option value="axleload">axle load</option>
+            <option value="length">length</option>
+            <option value="width">width</option>
+            <option value="height">height</option>
+            <option value="wheels">wheels</option>
+            <option value="draught">draught (ships)</option>
           </select> is <select id="vehicleproperty-ineq" name="vehicleproperty-ineq">
-            <option value="<">Less Than</option>
-            <option value="=">Equals</option>
-            <option value=">">More Than</option>
-            <option value="<=">At Most</option>
-            <option value=">=">At Least</option>
+            <option value="<">less than</option>
+            <option value="=">equal to</option>
+            <option value=">">more than</option>
+            <option value="<=">at most</option>
+            <option value=">=">at least</option>
           </select>
           <input type="number" id="vehicleproperty-value">
         </div>
         
         <div class="details-picker-inner" id="condition-vehicleusage-wrapper">
+          <select id="vehicleusage-key" name="vehicleusage-key">
+            <option value="occupants">Occupants</option>
+            <option value="hazmat">Hazmat</option>
+          </select>
         </div>
         
         <div class="details-picker-inner" id="condition-usergroup-wrapper">
-        
+          Vehicle user is <select id="usergroup" name="usergroup">
+            <option value="doctor">a doctor</option>
+            <option value="disabled">disabled</option>
+            <option value="emergency">emergency personnel</option>
+            <option value="female">female</option>
+          </select>
         </div>
         
         <div class="details-picker-inner" id="condition-accesspurpose-wrapper">
-        
+          Reason for access is <select id="accesspurpose" name="accesspurpose">
+            <option value="destination">to reach a later destination</option>
+            <option value="delivery">to make a delivery</option>
+          </select>
         </div>
         
         <div class="details-picker-inner" id="condition-stayduration-wrapper">
-        
+          When staying for <select id="stayduration-ineq" name=stayduration-ineq">
+            <option value="<">less than</option>
+            <option value="=">exactly</option>
+            <option value=">">more than</option>
+            <option value="<=">at most</option>
+            <option value=">=">at least</option>
+          </select>
+          <input type="number" id="stayduration-value" name="stayduration-value">
+          <select id="stayduration-units" name="stayduration-units">
+            <option value="hours">hours</option>
+            <option value="minutes">minutes</option>
+            <option value="days">days</option>
+          </select>
         </div>
       </div>
     </div>
