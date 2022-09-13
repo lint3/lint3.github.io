@@ -167,7 +167,7 @@ document.getElementById("add-condition-button").addEventListener('click', addCon
 var numConditions = 1;
 
 function addCondition(e) {
-  let cloneFrom = document.getElementsByClassName("condition");
+  let cloneFrom = document.getElementsByClassName("condition-form-outer");
   let cloneTo = cloneFrom[0].cloneNode(true);
   document.getElementById("notebook").appendChild(cloneTo);
   update();
