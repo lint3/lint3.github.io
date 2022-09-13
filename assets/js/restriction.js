@@ -167,8 +167,8 @@ document.getElementById("add-condition-button").addEventListener('click', addCon
 var numConditions = 1;
 
 function addCondition(e) {
-  cloneFrom = document.getElementsByClassName("condition");
-  cloneTo = cloneFrom.cloneNode(true);
+  let cloneFrom = document.getElementsByClassName("condition");
+  let cloneTo = cloneFrom.cloneNode(true);
   document.getElementById("notebook").appendChild(cloneTo);
   update();
 }
