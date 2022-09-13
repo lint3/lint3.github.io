@@ -168,7 +168,7 @@ function updatePickers() {
     }
     
     correctDetailsPicker = document.getElementById(form.id + "-" + myType + "-wrapper");
-    if (correctDetailsPicker == null {
+    if (correctDetailsPicker == null ) {
       correctDetailsPicker.style.display = "block";
     }
   }
