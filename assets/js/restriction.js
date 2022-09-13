@@ -168,7 +168,7 @@ var numConditions = 1;
 
 function addCondition(e) {
   let cloneFrom = document.getElementsByClassName("condition");
-  let cloneTo = cloneFrom.cloneNode(true);
+  let cloneTo = cloneFrom[0].cloneNode(true);
   document.getElementById("notebook").appendChild(cloneTo);
   update();
 }
