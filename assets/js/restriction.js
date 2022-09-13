@@ -165,7 +165,7 @@ function updatePickers() {
     for (detailsPicker of form.getElementsByClassName("details-picker-inner")) {
       detailsPicker.style.display = "none";
     }
-    correctDetailsPicker = form.getElementById(form.id + "-" + myType + "-wrapper");
+    correctDetailsPicker = document.getElementById(form.id + "-" + myType + "-wrapper");
     correctDetailsPicker.style.display = "block";
   }
   // For every form-outer:
