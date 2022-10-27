@@ -34,7 +34,7 @@ body {
 }
 
 body.kyloren {
-  max-width: 160ch;
+  max-width: 128ch;
 }
 
 body>* {
@@ -196,6 +196,7 @@ img {
 
 .cols {
   column-count: auto;
+  padding: 0;
 }
 
 .cols>li,
@@ -314,4 +315,13 @@ sup {
   vertical-align: super;
   font-size: smaller;
   line-height: normal;
+}
+
+.flex-cols {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-cols>* {
+  min-width: 50%;
 }
