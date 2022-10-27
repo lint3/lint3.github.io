@@ -195,6 +195,7 @@ img {
 .cols div,
 .cols>ul {
   break-inside: avoid;
+  display: inline-block;
 }
 
 .threecols {
