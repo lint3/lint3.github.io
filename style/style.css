@@ -192,10 +192,11 @@ img {
 }
 
 .cols>li,
-.cols div,
+.cols>div,
 .cols>ul {
   break-inside: avoid;
   display: inline-block;
+  padding-left: 1em;
 }
 
 .threecols {
