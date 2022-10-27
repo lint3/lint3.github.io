@@ -8,16 +8,9 @@
   margin: 0;
 }
 
-html {
-
-}
-
-
-
-@media only screen and (min-width: 48em) {
-  html {
-    font-size: 1.2em;
-  }
+body>* {
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 body {
@@ -33,13 +26,14 @@ body {
   color: #242424;
 }
 
-body.kyloren {
-  max-width: 128ch;
+@media only screen and (min-width: 48em) {
+  body {
+    font-size: 1.2em;
+  }
 }
 
-body>* {
-  margin-left: 1em;
-  margin-right: 1em;
+body.kyloren {
+  max-width: 128ch;
 }
 
 p {
@@ -126,7 +120,7 @@ h3 {
 
 a {
   text-decoration: none;
-  color: #4A6D7D;
+  color: #446473;
 }
 
 a:hover,
@@ -173,61 +167,32 @@ img {
   object-fit: cover;
 }
 
-/*
- ===========  SECONDARY NAV LIST  ===========
-*/
-
-.navlist li ul {
-  list-style-type: '-  ';
-}
-
-.navlist>li>h2 {
-  margin-bottom: 0.5em;
-}
-
-.navlist {
-  list-style-type: none;
-  padding: 0;
-}
-
-/*
- ===========  COLUMNS  ===========
-*/
-
-.cols {
-  column-width: 20em;
-  column-gap: 1em;
-}
-
-ul {
-  padding-left: 1em;
-}
-
-.cols>div {
-  break-inside: avoid-column;
-  display: inline-block;
-}
-
-.threecols {
-  column-width: 16em;
-}
-
-.twocols {
-  column-width: 24em;
-}
-
-.warning {
-  border-radius: 4px;
-  border: 1px solid #9b9915;
-  background: #e0dd4c;
-}
-
 .vimeo-box {
   border-radius: 4px;
   border: black solid 1px;
   overflow: hidden;
   margin-top: 1rem;
 }
+
+/*
+ ===========  NAV LIST  ===========
+*/
+
+.navlist li ul {
+  list-style-type: '-  ';
+}
+
+.navlist>div>h2 {
+  margin-bottom: 0.5em;
+}
+
+.navlist {
+  padding: 0;
+}
+
+/*
+ ==========  RING NAV  ===========
+*/
 
 .ring-nav {
   display: flex;
@@ -242,12 +207,38 @@ ul {
   margin: 0;
 }
 
-code {
-  background-color: #DBDBDB;
-  border-radius: 2px;
-  padding: 0.1em 0.3em;
+/*
+ ===========  COLUMNS  ===========
+*/
+
+.cols {
+  column-width: 20em;
+  column-gap: 1em;
 }
 
+.cols>div {
+  break-inside: avoid-column;
+  display: inline-block;
+}
+
+.twocols {
+  column-width: 24em;
+}
+
+.threecols {
+  column-width: 16em;
+}
+
+
+/*
+ ============== NOTES ============
+*/
+
+.warning {
+  border-radius: 4px;
+  border: 1px solid #9b9915;
+  background: #e0dd4c;
+}
 
 .note {
   border-radius: 6px;
@@ -277,16 +268,23 @@ code {
   border: 1px solid #AF0000;
   color: #FFFFFF;
 }
+
+
+
+
+code {
+  background-color: #DBDBDB;
+  border-radius: 2px;
+  padding: 0.1em 0.3em;
+}
+
+
   
 #map {
   height: 30em;
 }
 
 fieldset {
-margin-top: 2em;
-}
-
-details {
 margin-top: 2em;
 }
 
