@@ -195,16 +195,17 @@ img {
 */
 
 .cols {
-  column-count: auto;
-  padding: 0;
+  column-width: 20em;
+  column-gap: 1em;
 }
 
-.cols>li,
-.cols>div,
-.cols>ul {
-  break-inside: avoid;
-  display: inline-block;
+ul {
   padding-left: 1em;
+}
+
+.cols>div {
+  break-inside: avoid-column;
+  display: inline-block;
 }
 
 .threecols {
@@ -315,13 +316,4 @@ sup {
   vertical-align: super;
   font-size: smaller;
   line-height: normal;
-}
-
-.flex-cols {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.flex-cols>* {
-  min-width: 50%;
 }
