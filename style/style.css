@@ -16,6 +16,10 @@ html {
   margin: 0 auto;
 }
 
+html.kyloren {
+  max-width: 160ch;
+}
+
 @media only screen and (min-width: 48em) {
   html {
     font-size: 1.2em;
