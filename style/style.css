@@ -219,6 +219,7 @@ img {
 .cols>div {
   break-inside: avoid-column;
   display: inline-block;
+  width: 100%;
 }
 
 .twocols {
