@@ -50,10 +50,12 @@
 
         const stats = new Stats();
         container.appendChild( stats.dom );
+        
+        let mapDimensions = map.getBoundingClientRect();
 
         const renderer = new THREE.WebGLRenderer( { antialias: true } );
         renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( mapDimensions.width, mapDimensions.height );
         renderer.outputEncoding = THREE.sRGBEncoding;
         container.appendChild( renderer.domElement );
 
@@ -63,7 +65,7 @@
         scene.background = new THREE.Color( 0xbfe3dd );
         scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
 
-        const camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 100 );
+        const camera = new THREE.PerspectiveCamera( 40, mapDimensions.width/mapDimensions.height, 1, 100 );
         camera.position.set( 5, 2, 8 );
 
         const controls = new OrbitControls( camera, renderer.domElement );
@@ -95,9 +97,9 @@
 
 
         window.onresize = function () {
-          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.aspect = mapDimensions.width/mapDimensions.height;
           camera.updateProjectionMatrix();
-          renderer.setSize( window.innerWidth, window.innerHeight );
+          renderer.setSize( mapDimensions.width, mapDimensions.height );
         };
 
 
@@ -120,6 +122,7 @@
       <li><a href="https://threejs.org/examples/#webgl_lights_pointlights">Point Lights</a></li>
       <li><a href="https://threejs.org/examples/#webgl_materials_displacementmap">Displacement Map</a></li>
       <li><a href="https://threejs.org/editor/">ThreeJS Scene Editor</a></li>
+      <li><a href="https://discoverthreejs.com/book/">Discover three.js (online tutorial book)</a></li>
     </ul>
   </body>
 </html>
