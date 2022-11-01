@@ -321,3 +321,8 @@ sup {
   height: 80vh;
   background-color: black;
 }
+
+hr {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
