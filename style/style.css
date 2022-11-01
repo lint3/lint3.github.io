@@ -317,7 +317,7 @@ sup {
   line-height: normal;
 }
 
-.threedee-wrapper {
+.threedee-wrapper, #threedee-wrapper {
   height: 80vh;
   background-color: black;
 }

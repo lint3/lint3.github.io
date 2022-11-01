@@ -51,7 +51,7 @@
         const stats = new Stats();
         container.appendChild( stats.dom );
         
-        
+        // https://stackoverflow.com/questions/54202461/how-to-fit-the-size-of-the-three-js-renderer-to-a-webpage-element
         let mapDimensions = container.getBoundingClientRect();
 
         const renderer = new THREE.WebGLRenderer( { antialias: true } );
