@@ -77,7 +77,7 @@
 
         const loader = new GLTFLoader();
         loader.setDRACOLoader( dracoLoader );
-        loader.load( 'https://github.com/mrdoob/three.js/blob/master/examples/models/gltf/LittlestTokyo.glb', function ( gltf ) {
+        loader.load( '/assets/threedee/LittlestTokyo.glb', function ( gltf ) {
 
           const model = gltf.scene;
           model.position.set( 1, 1, 0 );
