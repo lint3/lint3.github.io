@@ -51,7 +51,8 @@
         const stats = new Stats();
         container.appendChild( stats.dom );
         
-        let mapDimensions = map.getBoundingClientRect();
+        
+        let mapDimensions = container.getBoundingClientRect();
 
         const renderer = new THREE.WebGLRenderer( { antialias: true } );
         renderer.setPixelRatio( window.devicePixelRatio );
