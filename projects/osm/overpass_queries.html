@@ -23,6 +23,8 @@
   way["name"~"^(North|East|South|West)"]({{bbox}});
 ); out body; >; out skel qt;<span class="buttbox"><a href="https://overpass-turbo.eu/s/1nvn">Run it</a></span></pre>
 
+    <h3>Todo: Roads with names beginning with digit but no prefix tag</h3>
+    
     <h3>Roads with no bike lane info</h3>
       <pre class="codeblock">[out:json][timeout:25]; (
   way["highway"="residential"]["cycleway"!~".*"]({{bbox}});
@@ -51,5 +53,7 @@
   relation["name_3"]({{bbox}});
 ); out body; >; out skel qt;<span class="buttbox"><a href="https://overpass-turbo.eu/s/1nvs">Run it</a></span></pre>
 
+  <h3>Todo: Ways with no name or <code>ref</code> tag (FS roads)</h3>
+    
   </body>
 </html>
