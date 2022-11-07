@@ -343,3 +343,15 @@ hr {
   margin-top: 1em;
   margin-bottom: 1em;
 }
+
+.right-link {
+  float: right;
+  font-size: 1em;
+  font-family: "SourceCodeProBlack";
+  font-weight: bold;
+  background-color: #9db3bd;
+  padding: 0.1em 0.3em;
+  border: 1px solid #8a9195;
+  border-radius: 4px;
+  color: #000000;
+}
