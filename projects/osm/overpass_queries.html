@@ -16,15 +16,11 @@
       <a href="/notes.html">Notes</a>
       <a href="/about.html">Jacob</a>
     </nav>
-    <h3>Roads with incorrect name</h3>
+    <h3>Ways with incorrect name format</h3>
       <p>(See <a href="https://wiki.openstreetmap.org/wiki/Utah/Naming_Conventions">UT Naming Conventions</a>)</p>
-      <pre class="codeblock">[out:json][timeout:25];
-(
+      <pre class="codeblock">[out:json][timeout:25]; (
   way["name"~"^(North|East|South|West)"]({{bbox}});
-);
-out body;
->;
-out skel qt;</pre>
+); out body; >; out skel qt;<span type="buttbox"><a href="https://overpass-turbo.eu/s/1nvn">Run it</a></span></pre>
 
     <h3>Roads with no bike lane info</h3>
       <pre class="codeblock">[out:json][timeout:25];
@@ -40,7 +36,7 @@ out body;
 >;
 out skel qt;</pre>
 
-    <h3>Roads with TIGER Tags</h3>
+    <h3>Ways with TIGER Tags</h3>
     <pre class="codeblock">[out:json][timeout:25];
 (
   way[~"^tiger:.*$"~"."]({{bbox}});
@@ -48,7 +44,7 @@ out skel qt;</pre>
 out body;
 >;</pre>
 
-    <h3>Roads with <code>name_1</code> etc.</h3>
+    <h3>Ways with <code>name_1</code> etc.</h3>
       <pre class="codeblock">[out:json][timeout:25];
 (
   node["name_1"]({{bbox}});
