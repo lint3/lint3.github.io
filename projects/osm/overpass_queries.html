@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Notes</title>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/assets/favicon.ico">
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/index.html" class="logo">JC</a>
+      <a href="/index.html">Index</a>
+      <a href="/projects.html">Projects</a>
+      <a href="/trips.html">Trips</a>
+      <a href="/notes.html">Notes</a>
+      <a href="/about.html">Jacob</a>
+    </nav>
+    <h3>Roads with incorrect name</h3>
+      <p>(See <a href="https://wiki.openstreetmap.org/wiki/Utah/Naming_Conventions">UT Naming Conventions</a>)</p>
+      <pre class="codeblock">[out:json][timeout:25];
+(
+  way["name"~"^(North|East|South|West)"]({{bbox}});
+);
+out body;
+>;
+out skel qt;</pre>
+
+    <h3>Roads with no bike lane info</h3>
+      <pre class="codeblock">[out:json][timeout:25];
+(
+  way["highway"="residential"]["cycleway"!~".*"]({{bbox}});
+  way["highway"="unclassified"]["cycleway"!~".*"]({{bbox}});
+  way["highway"="tertiary"]["cycleway"!~".*"]({{bbox}});
+  way["highway"="secondary"]["cycleway"!~".*"]({{bbox}});
+  way["highway"="primary"]["cycleway"!~".*"]({{bbox}});
+  way["highway"="trunk"]["cycleway"!~".*"]({{bbox}});
+);
+out body;
+>;
+out skel qt;</pre>
+
+    <h3>Roads with TIGER Tags</h3>
+    <pre class="codeblock">[out:json][timeout:25];
+(
+  way[~"^tiger:.*$"~"."]({{bbox}});
+);
+out body;
+>;</pre>
+
+    <h3>Roads with <code>name_1</code> etc.</h3>
+      <pre class="codeblock">[out:json][timeout:25];
+(
+  node["name_1"]({{bbox}});
+  way["name_1"]({{bbox}});
+  relation["name_1"]({{bbox}});
+  node["name_2"]({{bbox}});
+  way["name_2"]({{bbox}});
+  relation["name_2"]({{bbox}});
+  node["name_3"]({{bbox}});
+  way["name_3"]({{bbox}});
+  relation["name_3"]({{bbox}});
+);
+out body;
+>;
+out skel qt;</pre>
+
+  </body>
+</html>
