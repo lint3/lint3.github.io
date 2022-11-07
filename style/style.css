@@ -273,12 +273,11 @@ img {
 
 
 
-code {
+code, pre.codeblock {
   background-color: #DBDBDB;
   border-radius: 2px;
   padding: 0.1em 0.3em;
 }
-
 
   
 #map {
