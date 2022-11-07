@@ -284,6 +284,18 @@ pre.codeblock {
   padding: 0.5em 0.8em;
 }
 
+span.buttbox {
+  float: right;
+}
+
+span.buttbox>a {
+  background-color: #9db3bd;
+  padding: 0.1em 0.3em;
+  border: 1px solid #8a9195;
+  border-radius: 4px;
+  color: #000000;
+}
+
   
 #map {
   height: 30em;
