@@ -372,12 +372,7 @@ hr {
   object-fit: contain;
 }
 
-thead th:nth-child(1) { width: 8%; }
-thead th:nth-child(2) { width: 12%; }
-thead th:nth-child(3) { width: 24%; }
-thead th:nth-child(4) { width: 9%; }
-thead th:nth-child(5) { width: 9%; }
-thead th:nth-child(6) { width: 9%; }
+
 
 table {
   table-layout: fixed;
