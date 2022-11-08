@@ -354,3 +354,19 @@ hr {
   border-radius: 4px;
   color: #000000;
 }
+
+.img-explainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+.img-explainer>p {
+  max-width: 45em;
+  flex: 1 1 auto;
+}
+.img-explainer>img {
+  border: 1px solid #888
+  border-radius: 4px;
+  margin: 1em;
+  max-height: 10em;
+  flex: 1 1 auto;
+}
