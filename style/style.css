@@ -357,16 +357,16 @@ hr {
 
 .img-explainer {
   display: flex;
-  flex-wrap: wrap;
 }
-.img-explainer>p {
-  max-width: 45em;
-  flex: 1 1 auto;
+@media only screen and (min-width: 48em) {
+  .img-explainer {
+    flex-wrap: wrap;
+  }
 }
+
 .img-explainer>img {
-  border: 1px solid #888
+  border: 1px solid #888;
   border-radius: 4px;
   margin: 1em;
-  max-height: 10em;
-  flex: 1 1 auto;
+  object-fit: contain;
 }
