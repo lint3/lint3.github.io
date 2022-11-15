@@ -19,10 +19,16 @@
     <p>
       Nothin's ever easy. But things tend to be easier than they used to. But they're still pretty hard. 
     </p>
+    <p>Most of these assume Debian or similar.</p>
+    
+    
+    
     <h2>Thinkpad T530 Issues</h2>
+    
       <h3>Git - <code>Permanently added ECDSA host key...</code></h3>
         <p>Fix: in Bash, <code>ssh-keyscan github.com >> ~/.ssh/known_hosts</code></p>
         <p><a href="https://gist.github.com/vikpe/34454d69fe03a9617f2b009cc3ba200b">Source</a></p>
+        
       <h3>On boot - <code>Bluetooth firmware failed to load</code></h3>
         <ul>
           <li>Find exact error message after boot, and find bluetooth device name:
@@ -47,7 +53,87 @@ cd hex2hcd
 make</pre></li>
           <li>Convert to hcd (use missing firmware filename from beginning) and put in appropriate spot: <pre class="code">./hex2hcd ../BCM20702A1_001.002.014.0449.0462.hex BCM20702A1-0a5c-21e6.hcd</pre></li>
           <li>Do whatever you need to get it to <code>/lib/firmware/brcm/</code> on target machine.</li>
-          <li>Done.</li>
+          <li>Done. Source: <a href="https://forums.kali.org/showthread.php?37121-TUTORIAL-install-Broadcom-bluetooth-on-Lenovo-ThinkPad-X1-Carbon-1-gen">Kali Forums</a></li>
         </ul>
+        
+        
+        
+    <h2>Thinkpad T580 Issues</h2>
+      <p>AKA P52s</p>
+      <h3><code>Possible missing firmware</code> etc. etc. (i915)</h3>
+        <ul>
+          <li>Try installing <code>apt-file</code>. (Add <code>non-free</code> if necessary.)</li>
+          <li><code>apt-file search bxt_guc</code> or a distinct part of missing firmware path.</li>
+          <li>Then <code>apt install firmware-misc-nonfree</code>. (Only step necessary?)</li>
+        </ul>
+      
+      <h3>Allow touchpad input while keyboard pressed</h3>
+        <p>Note: KDE setting seems to actually work on Debian 11 as of 2022-09-26.</p>
+        <ul>
+          <li><code>xinput list</code></li>
+          <li>Find touchpad item. T580 is <code>Synaptics TM3276-031</code></li>
+          <li><code>xinput list-props $DEVICE_ID</code></li>
+          <li>Find disable while typing enabled (<code>299</code>?)</li>
+          <li>Unable to change the default for some reason? BadAccess</li>
+          <li><code>xinput set-prop 12 299 0</code></li>
+        </ul>
+      
+      <h3>Firefox uses GNOME file save/open dialogs.</h3>
+        <p>??? No solution. Should use KDE style dialogs</p>
+      
+      <h3>Firefox doesn't respect system defaults when opening downloaded files</h3>
+        <p>??? No solution. It tries to open PDFs by "installing" them with WINE??????</p>
+      
+      <h3>System resumes immediately after suspend.</h3>
+        <p>Some kind of ACPI event is waking it up.</p>
+        <ul>
+          <li>Look for <code>ACPI: EC: event blocked</code> somewhere in <code>dmesg</code></li>
+          <li><code>grep enabled /proc/acpi/wakeup | cut -f 1</code> (or <code>cat /proc/acpi/wakeup</code>)</li>
+          <li>Compare codes with <code>lspci</code> output to figure out what stuff is.</li>
+          <li>Disable USB wakeup? Didn't figure it out.</li>
+        </ul>
+        
+      <h3>Disable FnLock Light</h3>
+        <p>Invert it in BIOS.</p>
+        
+      <h3>Disable NumLock Light</h3>
+        <p>Note: Not persistent after reboot.</p>
+        <p><code>setxkbmap -option numpad:mac us</code></p>
+      
+      <h3>Display Tearing</h3>
+        <p>Create or edit file <code>/etc/X11/xorg.conf.d/20-intel-conf</code></p>
+        <pre class="code">Section "Device"
+  Identifier  "Intel Graphics"
+  Driver      "intel"
+  Option      "TearFree" "true"
+EndSection</pre>
+        <p>"Press X to not die"</p>
+        
+      <h3>Fan comes on and off constantly.</h3>
+        <p>I've mostly just come to deal with this...</p>
+        <ul> 
+          <li><a href="https://github.com/vmatare/thinkfan">ThinkFan on GitHub</a></li>
+          <li><a href="https://wiki.gentoo.org/wiki/Fan_speed_control/thinkfan">Gentoo Wiki ThinkFan Page</a></li>
+          <li><a href="https://github.com/stenri/TPFanControl">TPFanControl</a> is recommended by a few.</a></li>
+          <li><a href="https://askubuntu.com/questions/1219876/hand-control-to-thinkfan">Stack Overflow - Issues</a></li>
+          <li>Try changing in BIOS - Config - Thunderbolt - Thunderbolt BIOS Assist Mode to Enabled (Recommended by <a href="https://arrfab.net/posts/2019/Oct/29/fixing-heatfan-issue-on-thinkpad-t490s-running-centos-8stream/">Arrfab Blog</a></li>
+        </ul>
+        
+      <h3>Python Headaches</h3>
+        <p>Remove Python 2 and everything related. Remove <code>python-is-python2</code>. Install <code>python-is-python3</code>.</p>
+      
+    <h2>Debian Install</h2>
+      <h3>For Bare Minimum Install Headaches</h3>
+        <p>If "Install system utilites" fails or you just want to start from as little as possible.</p>
+        <ul>
+          <li>Use Ethernet. After connecting you may need to refresh DHCP client.</li>
+          <li>Use <code>apt</code> to install some necessary tools and bootstrap from there.</li>
+          <li>If there are no certificates for <code>apt</code> to use, uncomment the cd install line from </code>/etc/apt/sources.list</code>, then update and install some stuff like ssh from there first.</li>
+        </ul>
+        
+    <h2>NUC Setup</h2>
+      <ul>
+        <li>You can disable the LEDs in BIOS.</li>
+      </ul>
   </body>
 </html>

@@ -273,14 +273,14 @@ img {
 
 
 
-code, pre.codeblock {
+code, pre.codeblock, pre.code {
   background-color: #DBDBDB;
   border-radius: 2px;
   padding: 0.1em 0.3em;
   border: 1px solid #BFBFBF;
 }
 
-pre.codeblock {
+pre.codeblock, pre.code {
   padding: 0.5em 0.8em;
   border-radius: 4px;
 }
