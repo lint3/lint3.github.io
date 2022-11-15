@@ -21,8 +21,6 @@
     </p>
     <p>Most of these assume Debian or similar.</p>
     
-    
-    
     <h2>Thinkpad T530 Issues</h2>
     
       <h3>Git - <code>Permanently added ECDSA host key...</code></h3>
@@ -123,12 +121,15 @@ EndSection</pre>
         <p>Remove Python 2 and everything related. Remove <code>python-is-python2</code>. Install <code>python-is-python3</code>.</p>
       
     <h2>Debian Install</h2>
+      <h3>Install Recommend</h3>
+        <p>From an HN user: "Personally, I use the non-free netinst CD. When I get to tasksel I only check "Standard system utilites". After rebooting (into a system without even X) I install, wifi and GPU drivers, microcode, "kde-plasma-desktop" and "plasma-nm". This way, I get a very minimal and lean KDE desktop, and after rebooting I install other programs as I see fit."</p>
+        
       <h3>For Bare Minimum Install Headaches</h3>
         <p>If "Install system utilites" fails or you just want to start from as little as possible.</p>
         <ul>
           <li>Use Ethernet. After connecting you may need to refresh DHCP client.</li>
           <li>Use <code>apt</code> to install some necessary tools and bootstrap from there.</li>
-          <li>If there are no certificates for <code>apt</code> to use, uncomment the cd install line from </code>/etc/apt/sources.list</code>, then update and install some stuff like ssh from there first.</li>
+          <li>If there are no certificates for <code>apt</code>, uncomment the cd install line from <code>/etc/apt/sources.list</code>, then update and install some stuff like ssh from there first.</li>
         </ul>
         
     <h2>NUC Setup</h2>
