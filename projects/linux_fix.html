@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Fixes</title>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/assets/favicon.ico">
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/index.html" class="logo">JC</a>
+      <a href="/index.html">Index</a>
+      <a href="/projects.html">Projects</a>
+      <a href="/trips.html">Trips</a>
+      <a href="/notes.html">Notes</a>
+      <a href="/about.html">Jacob</a>
+    </nav>
+    <p>
+      Nothin's ever easy. But things tend to be easier than they used to. But they're still pretty hard. 
+    </p>
+    <h2>Thinkpad T530 Issues</h2>
+      <h3>Git - <code>Permanently added ECDSA host key...</code></h3>
+        <p>Fix: in Bash, <code>ssh-keyscan github.com >> ~/.ssh/known_hosts</code></p>
+        <p><a href="https://gist.github.com/vikpe/34454d69fe03a9617f2b009cc3ba200b">Source</a></p>
+      <h3>On boot - <code>Bluetooth firmware failed to load</code></h3>
+        <ul>
+          <li>Find exact error message after boot, and find bluetooth device name:
+              <pre class="code">sudo dmesg | grep -i bluetooth
+lsusb</pre></li>
+          <li>Likely returns something like <pre class="code">[    3.557646] Bluetooth: hci0: BCM20702A1 (001.002.014) build 0000
+[    3.557695] bluetooth hci0: firmware: failed to load brcm/BCM20702A1-0a5c-21e6.hcd (-2)
+[    3.557697] bluetooth hci0: Direct firmware load for brcm/BCM20702A1-0a5c-21e6.hcd failed with error -2
+[    3.557699] Bluetooth: hci0: BCM: Patch brcm/BCM20702A1-0a5c-21e6.hcd not found
+...
+Bus 003 Device 003: ID 0a5c:21e6 Broadcom Corp. BCM20702 Bluetooth 4.0 [ThinkPad]</pre></li>
+          <li>Download Bluetooth driver for Windows 7 from <a href="https://pcsupport.lenovo.com/us/en/products/laptops-and-netbooks/thinkpad-t-series-laptops/thinkpad-t530/downloads/driver-list/component?name=Bluetooth%20and%20Modem">Lenovo Site</a></li>
+          <li>Install <code>innoextract</code>, then extract the exe: <pre class="code">sudo apt install innoextract
+cd Downloads
+innoextract g4wb12ww.exe</pre></li>
+          <li>(Find name of hex file by looking in <code>app/Win64/bcbtums-win7x64-bcrm.inf</code>)</li>
+          <li><code>cat app/Win64/bcbtums-win7x64-bcrm.inf | grep "0A5C" | grep "21E6"</code></li>
+          <li>Returns something like <code>%BRCM20702Thinkpad.DeviceDesc%=RAMUSB21E6,  USB\VID_0A5C&PID_21E6       ; 20702 non-UHE Lenovo Japan</code>. Search again in the inf file for <code>RAMUSB21E6</code>. Find .hex file. In my case it is <code>BCM20702A1_001.002.014.0449.0462.hex</code>. We will use <code>hex2hcd</code> to get a hcd file.</li>
+          <li><pre class="code">cp app/Win64/BCM20702A1_001.002.014.0449.0462.hex ~/Downloads
+git clone git://github.com/jessesung/hex2hcd.git
+cd hex2hcd
+make</pre></li>
+          <li>Convert to hcd (use missing firmware filename from beginning) and put in appropriate spot: <pre class="code">./hex2hcd ../BCM20702A1_001.002.014.0449.0462.hex BCM20702A1-0a5c-21e6.hcd</pre></li>
+          <li>Do whatever you need to get it to <code>/lib/firmware/brcm/</code> on target machine.</li>
+          <li>Done.</li>
+        </ul>
+  </body>
+</html>
