@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terrain Model</title>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/assets/favicon.ico">
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/index.html" class="logo">JC</a>
+      <a href="/index.html">Index</a>
+      <a href="/projects.html">Projects</a>
+      <a href="/trips.html">Trips</a>
+      <a href="/notes.html">Notes</a>
+      <a href="/about.html">Jacob</a>
+    </nav>
+    <h1>Cut or Print Real Terrain</h1>
+    <h2>Get the Data</h2>
+      <ol>
+        <li>Visit <a href="https://viewer.nationalmap.gov/basic">USGS Nationalmap</a></li>
+        <li>Zoom to desired area. Click "Extent" on upper left, and draw box outlining relevant area</li>
+        <li>Tick "Elevation Products (3DEP)" on left menu</li>
+        <li>Select "1/3 arc-second DEM" and click "Search Products" (Blue button)</li>
+        <li>Click "Download Link (TIF). Or, add necessary files to cart, view cart, and download GeoTIFF files</li>
+      </ol>
+    <h2>Trim Data</h2>
+      <ol>
+        <li>Download and install <a href="https://www.qgis.org">QGIS</a> or use package manager. Launch it.</li>
+        <li>Click "Data Source Manager" (upper left, three little squares icon)</li>
+        <li>Choose "Raster", and choose source file downloaded. Click Add, then Close.</li>
+        <li>The downloaded data will be larger than the area you selected, so if it's hard to find the feature you chose originally, you can add an OSM layer by following the steps above but going to XYZ, then OpenStreetMap.</li>
+        <li>In QGIS menus, choose Raster -&gt; Extraction -&gt; Clip Raster By Extent -&gt; Choose dialog for "clipping extent..." -&gt; Select Extent on Canvas -&gt; Choose desired area</li>
+        <li>Choose "Clipped (extent)" chooser menu and name output layer.</li>
+      </ol>
+    <h2>Convert to STL</h2>
+      <ol>
+        <li>Install "DEMto3D" plugin (plugins -&gt; manage and install plugins)</li>
+        <li>Select Raster -&gt; DEMto3D -&gt; DEM 3D Printing
+          <ol>
+            <li>You can choose "select full extent" to do the entire thing.</li>
+            <li>0.2mm spacing works well for smaller models, 0.1 for more detail. Check your physical machine's capabilities.</li>
+            <li>Enter width and length.</li>
+            <li>For height field, a positive value will "chop" that many meters off the original model. If you set it to the minimum elevation in your area, there will be no extra base padding.</li>
+            <li>Export to STL</li>
+          </ol></li>
+      </ol>
+    <h2>Clean Up</h2>
+      <ol>
+        <li>Install and launch <a href="https://www.blender.org/">Blender</a>.</li>
+        <li>Delete default objects, then File -&gt; Import -&gt; STL. Choose your file.</li>
+        <li>Select imported mesh, then add modifier Smooth Corrective. I found these settings fix the "grid" pattern pretty well:
+          <ul>
+            <li>Factor: 0.8</li>
+            <li>Repeat: 5</li>
+            <li>Scale: 1.0</li>
+            <li>Smooth Type: Simple</li>
+            <li>Only Smooth</li>
+          </ul></li>
+        <li>Then, you can re-export to STL or whatever and print or carve.</li>
+      </ol>
+  </body>
+</html>
