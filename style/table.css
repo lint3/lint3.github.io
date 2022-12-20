@@ -24,10 +24,10 @@ table.sortable th.desc::before {
   margin-right: 1em;
 }
 
-table.sortable th.sorted {
+table.sortable th#sorted {
   background-color: #B0BADF;
 }
 
-table.sortable td.sorted {
+table.sortable td#sorted {
   background-color: #DADEED;
 }

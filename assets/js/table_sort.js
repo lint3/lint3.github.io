@@ -15,27 +15,42 @@ function sortTable(table, sortColumn) {
   const tableBody = table.querySelector('tbody');
   const tableData = table2data(tableBody);
   
-  var sortModePrev = headers[sortColumn].className;
-  var sortMode = "";
-  if (sortModePrev == "") { sortMode = "asc"; }
-  else if (sortModePrev == "sorted asc") { sortMode = "desc"; }
-  else if (sortModePrev == "sorted desc") { sortMode = "asc"; }
+  var colClass = headers[sortColumn].className;
+  var sortMode = "asc";
+  if (colClass.includes("asc") & colId == "sorted") {sortMode = "desc";}
   
+  var dataType = "alpha";
+  if (colClass.includes("numeric") {dataType = "numeric";}
   
-  tableData.sort((a, b) => {
-    if (a[sortColumn] > b[sortColumn] & sortMode == "asc") {
-      return 1;
-    }
-    if (a[sortColumn] < b[sortColumn] & sortMode == "desc") {
-      return 1;
-    }
-    return -1;
-  });
+  if (dataType == "numeric") {
+    tableData.sort((a, b) => {
+      if (parseFloat(a[sortColumn]) > parseFloat(b[sortColumn]) & sortMode == "asc") {
+        return 1;
+      }
+      if (parseFloat(a[sortColumn]) < parseFloat(b[sortColumn]) & sortMode == "desc") {
+        return 1;
+      }
+      return -1;
+    });
+  } else {
+    tableData.sort((a, b) => {
+      if (a[sortColumn] > b[sortColumn] & sortMode == "asc") {
+        return 1;
+      }
+      if (a[sortColumn] < b[sortColumn] & sortMode == "desc") {
+        return 1;
+      }
+      return -1;
+    });
+  }
   
+  // Clear sorted id for other cols
   headers.forEach(cell => {
-    cell.className = "";
+    cell.id = "";
   });
-  headers[sortColumn].className = "sorted " + sortMode;
+  
+  headers[sortColumn].id = "sorted";
+  headers[sortColumn].className = sortMode + " " + dataType;
   
   data2table(tableBody, tableData, sortColumn);
 }
