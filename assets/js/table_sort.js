@@ -26,6 +26,9 @@ function sortTable(table, sortColumn) {
     if (a[sortColumn] > b[sortColumn] & sortMode == "asc") {
       return 1;
     }
+    if (a[sortColumn] < b[sortColumn] & sortMode == "desc") {
+      return 1;
+    }
     return -1;
   });
   
