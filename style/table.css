@@ -19,7 +19,7 @@ table.sortable th.asc::before {
   margin-right: 1em;
 }
 
-table.sortable th.desc {
+table.sortable th.desc::before {
   content: "\25BC";
   margin-right: 1em;
 }

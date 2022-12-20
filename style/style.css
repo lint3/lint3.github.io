@@ -1,3 +1,20 @@
+/*
+ * Colors
+ */
+ 
+:root {
+  --color-accent-primary: #7cb9d3;
+  --color-accent-secondary: #fff;
+  --color-accent-tertiary: #446473;
+  --color-bar-primary: #1e1e1e;
+  --color-bar-primary-hover: #272727;
+  --color-bar-primary-active: #303030;
+  --color-bar-secondary: #E9E9E9;
+  --color-text-std: #242424;
+}
+
+
+
 @font-face {
   src: url("/assets/fonts/SourceCodePro-Black.ttf") format("truetype");
   font-family: "SourceCodeProBlack";
@@ -23,7 +40,7 @@ body {
   
   background-color: #f5f5f5;
   font-family: sans-serif;
-  color: #242424;
+  color: var(--color-text-std);
 }
 
 @media only screen and (min-width: 48em) {
@@ -45,7 +62,7 @@ p {
 */
 
 .navbar {
-  background-color: #1e1e1e;
+  background-color: var(--color-bar-primary);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -59,7 +76,7 @@ p {
 
 .navbar .logo {
   display: block;
-  color: #7cb9d3;
+  color: var(--color-accent-primary);
   padding: 0 3%;
   margin: 0;
   font-size: 1.5em;
@@ -68,7 +85,7 @@ p {
 }
 
 .navbar a {
-  color: #7cb9d3;
+  color: var(--color-accent-primary);
   padding: 0.1em 1%;
   margin: 0.1em 0.5%;
   display: block;
@@ -87,11 +104,11 @@ p {
 
 .navbar a:hover,
 .navbar a:focus {
-  background-color: #272727;
+  background-color: var(--color-bar-primary-hover);
 }
 
 .navbar .active {
-  background-color: #303030;
+  background-color: var(--color-bar-primary-active);
 }
 
 /*
@@ -120,7 +137,7 @@ h3 {
 
 a {
   text-decoration: none;
-  color: #446473;
+  color: var(--color-accent-tertiary);
 }
 
 a:hover,
@@ -133,7 +150,7 @@ a:focus {
 */
 
 a.fancy {
-  border: #4A6D7D solid 1px;
+  border: var(--color-accent-tertiary) solid 1px;
   border-radius: 4px;
   padding: 0.1em;
 }
@@ -141,8 +158,8 @@ a.fancy {
 a:hover.fancy,
 a:focus.fancy {
   text-decoration: none;
-  background-color: #4A6D7D;
-  color: #f5f5f5;
+  background-color: var(--color-accent-tertiary);
+  color: var(--color-text-std);
 }
 
 /*
@@ -254,7 +271,7 @@ img {
 }
 
 .note.weak {
-  background-color: #E9E9E9;
+  background-color: var(--color-bar-secondary);
   border: 1px solid #DDDDDD;
 }
 
