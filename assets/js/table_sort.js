@@ -18,8 +18,8 @@ function sortTable(table, sortColumn) {
   var sortModePrev = headers[sortColumn].className;
   var sortMode = "";
   if (sortModePrev == "") { sortMode = "asc"; }
-  if (sortModePrev == "asc") { sortMode = "desc"; }
-  if (sortModePrev == "desc") { sortMode = "asc"; }
+  if (sortModePrev == "sorted asc") { sortMode = "desc"; }
+  if (sortModePrev == "sorted desc") { sortMode = "asc"; }
   
   
   tableData.sort((a, b) => {
@@ -60,6 +60,7 @@ function data2table(tableBody, tableData, sortColumn) {
         .forEach((cell, j) => {
           cell.innerText = rowData[j];
           if (j == sortColumn) { cell.className = 'sorted'; }
+          else { cell.className = ""; }
         })
     });
 }

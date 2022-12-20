@@ -31,3 +31,7 @@ table.sortable th.desc {
 table.sortable th.sorted {
   background-color: #B0BADF;
 }
+
+table.sortable td.sorted {
+  background-color: #DADEED;
+}
