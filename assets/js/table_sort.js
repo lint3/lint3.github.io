@@ -35,7 +35,7 @@ function sortTable(table, sortColumn) {
   headers.forEach(cell => {
     cell.className = "";
   });
-  headers[sortColumn].className = "sorted " + "asc";
+  headers[sortColumn].className = "sorted " + sortMode;
   
   data2table(tableBody, tableData, sortColumn);
 }
