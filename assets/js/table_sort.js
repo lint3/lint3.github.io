@@ -18,12 +18,12 @@ function sortTable(table, sortColumn) {
   var sortModePrev = headers[sortColumn].className;
   var sortMode = "";
   if (sortModePrev == "") { sortMode = "asc"; }
-  if (sortModePrev == "sorted asc") { sortMode = "desc"; }
-  if (sortModePrev == "sorted desc") { sortMode = "asc"; }
+  else if (sortModePrev == "sorted asc") { sortMode = "desc"; }
+  else if (sortModePrev == "sorted desc") { sortMode = "asc"; }
   
   
   tableData.sort((a, b) => {
-    if (a[sortColumn] > b[sortColumn] ^ sortMode == "asc") {
+    if (a[sortColumn] > b[sortColumn] & sortMode == "asc") {
       return 1;
     }
     return -1;
