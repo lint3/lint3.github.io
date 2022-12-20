@@ -16,6 +16,7 @@ function sortTable(table, sortColumn) {
   const tableData = table2data(tableBody);
   
   var colClass = headers[sortColumn].className;
+  var colId = headers[sortColumn].id;
   var sortMode = "asc";
   if (colClass.includes("asc") & colId == "sorted") {sortMode = "desc";}
   
