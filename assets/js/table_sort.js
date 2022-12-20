@@ -10,22 +10,28 @@ table.querySelectorAll('th')
     })
   });
 
-function sortTable(table, sortColumn) {
+function sortTable(table, sortColumn) {  
+  const headers = table.querySelectorAll('th');
   const tableBody = table.querySelector('tbody');
   const tableData = table2data(tableBody);
   
+  var sortModePrev = headers[sortColumn].className;
+  var sortMode = "";
+  if (sortModePrev == "") { sortMode = "asc"; }
+  if (sortModePrev == "asc") { sortMode = "desc"; }
+  if (sortModePrev == "desc") { sortMode = "asc"; }
+  
+  
   tableData.sort((a, b) => {
-    if (a[sortColumn] > b[sortColumn]) {
+    if (a[sortColumn] > b[sortColumn] ^ sortMode == "asc") {
       return 1;
     }
     return -1;
   });
   
-  // Style sorted header
-  const headers = table.querySelectorAll('th');
   headers.forEach(cell => {
     cell.className = "";
-  }
+  });
   headers[sortColumn].className = "sorted " + "asc";
   
   data2table(tableBody, tableData, sortColumn);
