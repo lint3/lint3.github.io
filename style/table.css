@@ -1,0 +1,33 @@
+table {
+  table-layout: fixed;
+  width: 100%;
+  border: 1px solid #888;
+  border-collapse: collapse;
+  min-width: 50em;
+  font-size: smaller;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+th, td {
+  padding: 0.1em 0.5em;
+  border: 1px solid #AAA;
+}
+
+table.sortable {
+  
+}
+
+table.sortable th.asc::before {
+  content: " &#9650; ";
+  margin-right: 2em;
+}
+
+table.sortable th.desc {
+  content: " &#9660; ";
+  margin-right: 2em;
+}
+
+table.sortable th.sorted {
+  background-color: #B0BADF;
+}

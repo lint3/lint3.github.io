@@ -1,3 +1,6 @@
+// Adopted from user "Tom P" on Stack Overflow: https://stackoverflow.com/a/57080195
+
+
 const table = document.querySelector('.sortable');
 
 table.querySelectorAll('th')
@@ -18,7 +21,10 @@ function sortTable(table, sortColumn) {
     return -1;
   });
   
-  data2table(tableBody, tableData);
+  // Style sorted header
+  table.querySelectorAll('th')[sortColumn].className = "sorted " + "asc";
+  
+  data2table(tableBody, tableData, sortColumn);
 }
 
 function table2data(tableBody) {
@@ -36,13 +42,40 @@ function table2data(tableBody) {
 }
 
 
-function data2table(tableBody, tableData) {
+function data2table(tableBody, tableData, sortColumn) {
   tableBody.querySelectorAll('tr')
     .forEach((row, i) => {
       const rowData = tableData[i];
       row.querySelectorAll('td')
         .forEach((cell, j) => {
           cell.innerText = rowData[j];
+          if (j == sortColumn) { cell.className = 'sorted'; }
         })
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

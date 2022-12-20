@@ -374,16 +374,4 @@ hr {
 
 
 
-table {
-  table-layout: fixed;
-  width: 100%;
-  border: 1px solid #888;
-  border-collapse: collapse;
-  min-width: 50em;
-  font-size: smaller;
-}
 
-th, td {
-  padding: 0.1em 0.5em;
-  border: 1px solid #AAA;
-}
