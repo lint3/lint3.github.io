@@ -78,8 +78,8 @@ function data2table(tableBody, tableData, sortColumn) {
       row.querySelectorAll('td')
         .forEach((cell, j) => {
           cell.innerText = rowData[j];
-          if (j == sortColumn) { cell.className = 'sorted'; }
-          else { cell.className = ""; }
+          if (j == sortColumn) { cell.id = 'sorted'; }
+          else { cell.id = ""; }
         })
     });
 }
