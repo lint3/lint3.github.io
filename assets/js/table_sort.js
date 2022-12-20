@@ -22,7 +22,11 @@ function sortTable(table, sortColumn) {
   });
   
   // Style sorted header
-  table.querySelectorAll('th')[sortColumn].className = "sorted " + "asc";
+  const headers = table.querySelectorAll('th');
+  headers.forEach(cell => {
+    cell.className = "";
+  }
+  headers[sortColumn].className = "sorted " + "asc";
   
   data2table(tableBody, tableData, sortColumn);
 }

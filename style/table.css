@@ -19,13 +19,13 @@ table.sortable {
 }
 
 table.sortable th.asc::before {
-  content: " &#9650; ";
-  margin-right: 2em;
+  content: "\25B2";
+  margin-right: 1em;
 }
 
 table.sortable th.desc {
-  content: " &#9660; ";
-  margin-right: 2em;
+  content: "\25BC";
+  margin-right: 1em;
 }
 
 table.sortable th.sorted {
