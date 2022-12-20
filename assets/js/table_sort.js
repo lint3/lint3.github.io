@@ -20,7 +20,7 @@ function sortTable(table, sortColumn) {
   if (colClass.includes("asc") & colId == "sorted") {sortMode = "desc";}
   
   var dataType = "alpha";
-  if (colClass.includes("numeric") {dataType = "numeric";}
+  if (colClass.includes("numeric")) {dataType = "numeric";}
   
   if (dataType == "numeric") {
     tableData.sort((a, b) => {
