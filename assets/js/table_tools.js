@@ -25,8 +25,7 @@ function ColumnDataTemplate() {
 function addTools() {
   
   for (let i = 0; i < headers.length; i++) {
-    var data = new ColumnDataTemplate();
-    actionData[i] = data;
+    actionData[i] = new ColumnDataTemplate();
     actionData[i].dataType = headers[i].getAttribute('datatype');
   }
 
@@ -38,7 +37,26 @@ function addTools() {
     
   var clearButton = document.createElement('input');
   setAttributes(clearButton, {'class': 'clear-input', 'type': 'button', 'value': 'Clear All Filters'});
+  clearButton.addEventListener('click', (event) => {
+    clearInputs();
+  });
   tableWrapper.appendChild(clearButton);
+}
+
+function clearInputs() {
+  for (searchBox of tableWrapper.querySelectorAll('.column-search')) {
+    searchBox.value = '';
+  }
+  for (minBox of tableWrapper.querySelectorAll('.column-min')) {
+    minBox.value = '';
+  }
+  for (maxBox of tableWrapper.querySelectorAll('.column-max')) {
+    maxBox.value = '';
+  }
+  for (i in actionData) {
+    actionData[i] = new ColumnDataTemplate();
+    actionData[i].dataType = headers[i].getAttribute('datatype');
+  }
 }
 
 function applyActions() {
@@ -96,11 +114,11 @@ function generateColumnTools(type, columnNo) {
   // Min/max inputs
   if (type == 'numeric') {
     var minBox = document.createElement('input');
-    setAttributes(minBox, {'type': 'text', 'class': 'column-min', 'placeholder': 'min'});
+    setAttributes(minBox, {'type': 'text', 'class': 'column-min', 'placeholder': 'min', 'size': '8'});
     applyActionsInputs.push(minBox);
     
     var maxBox = document.createElement('input');
-    setAttributes(maxBox, {'type': 'text', 'class': 'column-max', 'placeholder': 'max'});
+    setAttributes(maxBox, {'type': 'text', 'class': 'column-max', 'placeholder': 'max', 'size': '8'});
     applyActionsInputs.push(maxBox);
     
   } else {
@@ -185,9 +203,6 @@ function sortTable(tableData, col, buttAction) {
   updateTable(tableData);
 }
 
-
-
-
 function table2data(tableBody) {
   const tableData = [];
   tableBody.querySelectorAll('tr')
@@ -228,6 +243,7 @@ function updateTable(tableData) {
   if (tableBody.innerHTML == "") {
     noResults = document.createElement('div');
     noResults.textContent = "No Results";
-    tableBody.appendChild(noResults);
+    noResults.className = "no-results";
+    tableWrapper.appendChild(noResults);
   }
 }

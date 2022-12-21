@@ -22,8 +22,12 @@ table.ttools td.sorted {
   background-color: #DADEED;
 }
 
-table.ttools > .tools-button,
-table.ttools > .clear-input {
+ttools .tools-button,
+ttools .clear-input {
   float: right;
   margin: 0.2em;
+}
+
+ttools .no-results {
+  text-align: center;
 }
