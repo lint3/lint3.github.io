@@ -66,8 +66,8 @@ function setAttributes(element, attributes) {
 
 function getColumnActions(col) {
   actionData[col].query = headers[col].querySelector('.column-search').value;
-  actionData[col] = headers[col].querySelector('.column-min').value;
-  actionData[col] = headers[col].querySelector('.column-max').value;
+  actionData[col].min = headers[col].querySelector('.column-min').value;
+  actionData[col].max = headers[col].querySelector('.column-max').value;
   return actionData[col];
 }
 
