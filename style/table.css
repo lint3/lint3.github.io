@@ -14,12 +14,12 @@ th, td {
   border: 1px solid #AAA;
 }
 
-table.sortable th.asc::before {
+table.sortable th#sorted.asc::before {
   content: "\25B2";
   margin-right: 1em;
 }
 
-table.sortable th.desc::before {
+table.sortable th#sorted.desc::before {
   content: "\25BC";
   margin-right: 1em;
 }
