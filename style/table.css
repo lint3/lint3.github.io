@@ -14,12 +14,16 @@ th, td {
   border: 1px solid #AAA;
 }
 
-table.ttools th.sorted {
-  background-color: #B0BADF;
+.ttools th.sorted {
+  background-color: #D6DBEE;
 }
 
-table.ttools td.sorted {
-  background-color: #DADEED;
+.ttools td.sorted {
+  background-color: #EBEDF5;
+}
+
+.ttools th.filtered {
+  border-top: 2px dashed #0008;
 }
 
 .ttools .tools-button,
