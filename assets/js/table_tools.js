@@ -24,18 +24,6 @@ for (let i = 0; i < headers.length; i++) {
 }
 
 
-// Add sort event listeners
-/*
-table.querySelectorAll('th')
-  .forEach((element, columnNo) => {
-    element.addEventListener('click', event => {
-      sortTable(table, columnNo);
-    });
-    element.prepend(generateColumnTools(table, element.getAttribute('datatype'), columnNo));
-  });
-  
-*/
-
 // Add tools UI to each header cell
 table.querySelectorAll('th')
   .forEach((element, columnNo) => {
@@ -121,8 +109,15 @@ function filterTable(col) {
   
 }
 
-function clipTable(col) {
-  
+function clipTable(tableData, col, min, max) {
+  var result = [];
+  for (let i = 0; i < tableData.length; i++) {
+    let value = parseFloat(tableData[i][col]);
+    if (value >= min & value <= max) {
+      result.push(tableData[i]);
+    }
+  }
+  tableData = result;
 }
 
 function sortTable(col, buttAction) {
@@ -159,7 +154,6 @@ function sortTable(col, buttAction) {
   }
   
   updateTable(tableData);
-  
 }
 
 
@@ -183,7 +177,8 @@ function updateTable(tableData) {
   headers.forEach((cell, i) => {
     if (actionData[i].sorted) {
       cell.className = "sorted";
-    }
+    } else {
+      cell.className = "";
   });
   
   tableBody.querySelectorAll('tr')
@@ -194,7 +189,8 @@ function updateTable(tableData) {
       cell.innerText = rowData[j];
       if (actionData[j].sorted) {
         cell.className = "sorted";
-      }
+      } else {
+        cell.className = "";
     })
   });
 }
