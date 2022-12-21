@@ -196,17 +196,16 @@ function updateTable(tableData) {
     }
   });
   
-  tableBody.querySelectorAll('tr')
-  .forEach((row, i) => {
-    const rowData = tableData[i];
-    row.querySelectorAll('td')
-    .forEach((cell, j) => {
-      cell.innerText = rowData[j];
+  tableBody.innerHTML = "";
+  
+  tableData.forEach((row, i) => {
+    var tr = document.createElement('tr');
+    row.forEach((cell, j) => {
+      var td = document.createElement('td');
+      td.innerText = tableData[i][j];
       if (actionData[j].sorted) {
         cell.className = "sorted";
-      } else {
-        cell.className = "";
       }
-    })
+    });
   });
 }
