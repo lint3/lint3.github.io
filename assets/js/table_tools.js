@@ -180,12 +180,21 @@ function table2data(tableBody) {
 }
 
 function updateTable(tableData) {
+  headers.forEach((cell, i) => {
+    if (actionData[i].sorted) {
+      cell.className = "sorted";
+    }
+  });
+  
   tableBody.querySelectorAll('tr')
   .forEach((row, i) => {
     const rowData = tableData[i];
     row.querySelectorAll('td')
     .forEach((cell, j) => {
       cell.innerText = rowData[j];
+      if (actionData[j].sorted) {
+        cell.className = "sorted";
+      }
     })
   });
 }

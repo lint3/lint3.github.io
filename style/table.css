@@ -14,20 +14,10 @@ th, td {
   border: 1px solid #AAA;
 }
 
-table.sortable th#sorted.asc::before {
-  content: "\25B2";
-  margin-right: 1em;
-}
-
-table.sortable th#sorted.desc::before {
-  content: "\25BC";
-  margin-right: 1em;
-}
-
-table.sortable th#sorted {
+table.sortable th.sorted {
   background-color: #B0BADF;
 }
 
-table.sortable td#sorted {
+table.sortable td.sorted {
   background-color: #DADEED;
 }
