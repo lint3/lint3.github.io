@@ -144,20 +144,20 @@ function sortTable(col, buttAction) {
 
   if (actionData[col].dataType == "numeric") {
     tableData.sort((a, b) => {
-      if (parseFloat(a[sortColumn]) > parseFloat(b[sortColumn]) & sortMode == "asc") {
+      if (parseFloat(a[col]) > parseFloat(b[col]) & sortMode == "asc") {
         return 1;
       }
-      if (parseFloat(a[sortColumn]) < parseFloat(b[sortColumn]) & sortMode == "desc") {
+      if (parseFloat(a[col]) < parseFloat(b[col]) & sortMode == "desc") {
         return 1;
       }
       return -1;
     });
   } else {
     tableData.sort((a, b) => {
-      if (a[sortColumn] > b[sortColumn] & sortMode == "asc") {
+      if (a[col] > b[col] & sortMode == "asc") {
         return 1;
       }
-      if (a[sortColumn] < b[sortColumn] & sortMode == "desc") {
+      if (a[col] < b[col] & sortMode == "desc") {
         return 1;
       }
       return -1;
