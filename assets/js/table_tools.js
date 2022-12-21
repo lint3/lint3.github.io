@@ -179,6 +179,7 @@ function updateTable(tableData) {
       cell.className = "sorted";
     } else {
       cell.className = "";
+    }
   });
   
   tableBody.querySelectorAll('tr')
