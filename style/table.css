@@ -25,9 +25,12 @@ table.ttools td.sorted {
 .ttools .tools-button,
 .ttools .clear-input {
   float: right;
-  margin: 0.2em;
 }
 
 .ttools .no-results {
   text-align: center;
+}
+
+.ttools input {
+  margin: 0.2em;
 }

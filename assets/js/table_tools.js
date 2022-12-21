@@ -41,6 +41,7 @@ function addTools() {
     clearInputs();
   });
   tableWrapper.appendChild(clearButton);
+  tableWrapper.removeChild(toolsButton);
 }
 
 function clearInputs() {
