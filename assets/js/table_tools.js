@@ -226,7 +226,7 @@ function updateTable(tableData) {
   headers.forEach((cell, i) => {
     cell.classList = [];
     if (actionData[i].sorted) {
-      cell.classList.push("sorted");
+      cell.classList.add("sorted");
       if (actionData[i].sortAsc) {
         headers[i].querySelector('.column-sort').value = 'sort &#9650;';
       } else {
@@ -234,7 +234,7 @@ function updateTable(tableData) {
       }
     }
     if (actionData[i].min != null | actionData[i].max != null | actionData[i].query != "") {
-      cell.classList.push("filtered");
+      cell.classList.add("filtered");
     }
   });
   
@@ -246,10 +246,10 @@ function updateTable(tableData) {
       var td = document.createElement('td');
       td.innerText = cell;
       if (actionData[j].sorted) {
-        td.classList.push("sorted");
+        td.classList.add("sorted");
       }
       if (actionData[j].min != null | actionData[i].max != null | actionData[i].query != "") {
-        td.classList.push("filtered");
+        td.classList.add("filtered");
       }
       tr.appendChild(td);
     });
