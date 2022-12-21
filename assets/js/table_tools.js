@@ -12,7 +12,7 @@ table.querySelectorAll('th')
   });
     
 
-element.prepend(generateColumnTools(element.getAttribute('datatype'));
+element.prepend(generateColumnTools(element.getAttribute('datatype')));
 
 function setAttributes(element, attributes) {
   for (attr in attributes) {
