@@ -54,6 +54,7 @@ function applyActions() {
     
     if (columnActions.sorted) {
       sortTable(activeTableData, i, false);
+    }
   }
 }
 
