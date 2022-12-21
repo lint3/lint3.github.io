@@ -11,7 +11,7 @@ var actionData = {};
 var toolsButton = document.createElement('input');
 setAttributes(toolsButton, {'type': 'button', 'value': 'filter/sort', 'class': 'tools-button'});
 toolsButton.addEventListener('click', (event) => { addTools(); });
-tableWrapper.appendChild(toolsButton);
+tableWrapper.prepend(toolsButton);
 
 function ColumnDataTemplate() {
   this.query = '';
@@ -40,7 +40,7 @@ function addTools() {
   clearButton.addEventListener('click', (event) => {
     clearInputs();
   });
-  tableWrapper.appendChild(clearButton);
+  tableWrapper.prepend(clearButton);
   tableWrapper.removeChild(toolsButton);
 }
 
@@ -128,7 +128,7 @@ function generateColumnTools(type, columnNo) {
   } else {
     // Search filter input
     var searchBox = document.createElement('input');
-    setAttributes(searchBox, {'type': 'text', 'class': 'column-search', 'placeholder': 'search'});
+    setAttributes(searchBox, {'type': 'text', 'class': 'column-search', 'placeholder': 'search', 'size': '12'});
     applyActionsInputs.push(searchBox);
   }
   
@@ -246,7 +246,7 @@ function updateTable(tableData) {
       if (actionData[j].sorted) {
         td.classList.add("sorted");
       }
-      if (actionData[j].min != null | actionData[i].max != null | actionData[i].query != "") {
+      if (actionData[j].min != null | actionData[j].max != null | actionData[j].query != "") {
         td.classList.add("filtered");
       }
       tr.appendChild(td);
