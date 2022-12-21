@@ -230,6 +230,8 @@ function updateTable(tableData) {
       } else {
         headers[i].querySelector('.column-sort').value = 'sort ▼';
       }
+    } else {
+      headers[i].querySelector('.column-sort').value = 'sort';
     }
     if (actionData[i].min != null | actionData[i].max != null | actionData[i].query != "") {
       cell.classList.add("filtered");

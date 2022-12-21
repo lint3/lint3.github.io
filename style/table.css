@@ -34,3 +34,14 @@ table.ttools td.sorted {
 .ttools input {
   margin: 0.2em;
 }
+
+.ttools .column-search,
+.ttools .column-min,
+.ttools .column-max {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.ttools .header-actions {
+  display: flex;
+}
