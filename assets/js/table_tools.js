@@ -13,7 +13,7 @@ function ColumnDataTemplate() {
   this.min = null;
   this.max = null;
   this.sorted = false;
-  this.sortMode = 'asc';
+  this.sortAsc = true;
   this.dataType = 'alpha';
 };
 
@@ -126,38 +126,29 @@ function clipTable(col) {
 }
 
 function sortTable(col, buttAction) {
-  // buttAction is whether or not function was called by sort button pressed (Toggle sort asc/desc?)
-  // Switch sort mode if button pressed
-  var alreadySorted = actionData[col].sorted;
-  var sortMode = actionData[col].sortMode ^ (buttAction & alreadySorted);
+  // If button clicked and we had already sorted on this column, toggle sort asc/desc
+  var sortAsc = actionData[col].sortAsc ^ (buttAction & actionData[col].sorted);
   actionData[col].sorted = true;
-  if (buttAction) {
-    if (alreadySorted & sortMode == 'asc') {
-      sortMode = 'desc';
-    } else {
-      sortMode = 'asc';
-    }
-  }
-  actionData[col].sortMode = sortMode;
+  actionData[col].sortAsc = sortAsc;
   
   var tableData = table2data(tableBody);
 
   if (actionData[col].dataType == "numeric") {
     tableData.sort((a, b) => {
-      if (parseFloat(a[col]) > parseFloat(b[col]) & sortMode == "asc") {
+      if (parseFloat(a[col]) > parseFloat(b[col]) & sortAsc) {
         return 1;
       }
-      if (parseFloat(a[col]) < parseFloat(b[col]) & sortMode == "desc") {
+      if (parseFloat(a[col]) < parseFloat(b[col]) & !sortAsc) {
         return 1;
       }
       return -1;
     });
   } else {
     tableData.sort((a, b) => {
-      if (a[col] > b[col] & sortMode == "asc") {
+      if (a[col] > b[col] & sortAsc) {
         return 1;
       }
-      if (a[col] < b[col] & sortMode == "desc") {
+      if (a[col] < b[col] & !sortAsc) {
         return 1;
       }
       return -1;
