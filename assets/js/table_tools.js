@@ -184,12 +184,10 @@ function sortTable(tableData, col, buttAction) {
 
   if (actionData[col].dataType == "numeric") {
     tableData.sort((a, b) => {
-      if (parseFloat(a[col]) > parseFloat(b[col]) & sortAsc) {
-        return 1;
-      }
-      if (parseFloat(a[col]) < parseFloat(b[col]) & !sortAsc) {
-        return 1;
-      }
+      if (!isNaN(parseFloat(a[col])) & isNaN(parseFloat(b[col]))) { return 1; }
+      if (isNaN(parseFloat(a[col])) & !isNaN(parseFloat(b[col]))) { return 1; }
+      if (parseFloat(a[col]) > parseFloat(b[col]) & sortAsc) { return 1; }
+      if (parseFloat(a[col]) < parseFloat(b[col]) & !sortAsc) { return 1; }
       return -1;
     });
   } else {
