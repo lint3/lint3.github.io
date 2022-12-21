@@ -128,6 +128,9 @@ function clipTable(col) {
 function sortTable(col, buttAction) {
   // If button clicked and we had already sorted on this column, toggle sort asc/desc
   var sortAsc = actionData[col].sortAsc ^ (buttAction & actionData[col].sorted);
+  for (let i = 0; i < headers.length; i++) {
+    actionData[i].sorted = false;
+  }
   actionData[col].sorted = true;
   actionData[col].sortAsc = sortAsc;
   
