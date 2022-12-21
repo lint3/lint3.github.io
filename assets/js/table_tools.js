@@ -118,11 +118,11 @@ function generateColumnTools(type, columnNo) {
   // Min/max inputs
   if (type == 'numeric') {
     var minBox = document.createElement('input');
-    setAttributes(minBox, {'type': 'text', 'class': 'column-min', 'placeholder': 'min', 'size': '8'});
+    setAttributes(minBox, {'type': 'text', 'class': 'column-min', 'placeholder': 'min', 'size': '6'});
     applyActionsInputs.push(minBox);
     
     var maxBox = document.createElement('input');
-    setAttributes(maxBox, {'type': 'text', 'class': 'column-max', 'placeholder': 'max', 'size': '8'});
+    setAttributes(maxBox, {'type': 'text', 'class': 'column-max', 'placeholder': 'max', 'size': '6'});
     applyActionsInputs.push(maxBox);
     
   } else {
@@ -224,10 +224,17 @@ function table2data(tableBody) {
 function updateTable(tableData) {
   
   headers.forEach((cell, i) => {
+    cell.classList = [];
     if (actionData[i].sorted) {
-      cell.className = "sorted";
-    } else {
-      cell.className = "";
+      cell.classList.push("sorted");
+      if (actionData[i].sortAsc) {
+        headers[i].querySelector('.column-sort').value = 'sort &#9650;';
+      } else {
+        headers[i].querySelector('.column-sort').value = 'sort &#9660;';
+      }
+    }
+    if (actionData[i].min != null | actionData[i].max != null | actionData[i].query != "") {
+      cell.classList.push("filtered");
     }
   });
   
@@ -239,12 +246,17 @@ function updateTable(tableData) {
       var td = document.createElement('td');
       td.innerText = cell;
       if (actionData[j].sorted) {
-        td.className = "sorted";
+        td.classList.push("sorted");
+      }
+      if (actionData[j].min != null | actionData[i].max != null | actionData[i].query != "") {
+        td.classList.push("filtered");
       }
       tr.appendChild(td);
     });
     tableBody.appendChild(tr);
   });
+  
+  
   if (tableBody.innerHTML == "") {
     noResults = document.createElement('div');
     noResults.textContent = "No Results";
