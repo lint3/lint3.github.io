@@ -202,10 +202,12 @@ function updateTable(tableData) {
     var tr = document.createElement('tr');
     row.forEach((cell, j) => {
       var td = document.createElement('td');
-      td.innerText = tableData[i][j];
+      td.innerText = cell;
       if (actionData[j].sorted) {
-        cell.className = "sorted";
+        td.className = "sorted";
       }
+      tr.appendChild(td);
     });
+    tableBody.appendChild(tr);
   });
 }
