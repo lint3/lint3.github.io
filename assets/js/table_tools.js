@@ -5,9 +5,8 @@ const headers = table.querySelectorAll('th');
 const tableBody = table.querySelector('tbody');
 const tableWrapper = document.querySelector('.table-wrapper');
 const allTableData = table2data(tableBody);
-var lastActiveTableData = structuredClone(allTableData);
 
-var actionData = {lastActiveColumn: 0};
+var actionData = {};
 
 var toolsButton = document.createElement('input');
 setAttributes(toolsButton, {'type': 'button', 'value': 'Filter, Sort, Etc.', 'class': 'tools-button'});
@@ -39,23 +38,23 @@ function addTools() {
     });
 }
 
-function applyActions(activeColumn) {
-  var columnActions = getColumnActions(activeColumn);
-  if (activeColumn == actionData.lastActiveColumn) {
-    // We don't need to recompute everything, just narrow lastActiveTableData using activeColumn's params
-    var activeTableData = structuredClone(lastActiveTableData);
-    
-    filterTable(activeTableData, activeColumn, columnActions.query);
-    clipTable(activeTableData, activeColumn, columnActions.min, columnActions.max);
-  } else {
-    // We have to recompute everything
-    var activeTableData = structuredClone(allTableData);
-    activeTableData = filterTable(activeTableData, activeColumn, columnActions.query);
-    activeTableData = clipTable(activeTableData, activeColumn, columnActions.min, columnActions.max);
-    lastActiveTableData = structuredClone(activeTableData);
-  }
-  sortTable(activeTableData, activeColumn, false)
+function applyActions() {
+  var activeTableData = structuredClone(allTableData);
   
+  for (i in actionData) {
+    var columnActions = getColumnActions(i);
+    
+    if (columnActions.query != '') {
+      activeTableData = filterTable(activeTableData, i, columnActions.query);
+    }
+    
+    if (columnActions.min != null | columnActions.max != null ) {
+      activeTableData = clipTable(activeTableData, i, columnActions.min, columnActions.max);
+    }
+    
+    if (columnActions.sorted) {
+      sortTable(activeTableData, i, false);
+  }
 }
 
 function setAttributes(element, attributes) {
@@ -75,14 +74,13 @@ function generateColumnTools(type, columnNo) {
   // Create wrapper
   var headerActions = document.createElement('div');
   setAttributes(headerActions, {'class': 'header-actions'});
+  var applyActionsInputs = [];
   
   // Search filter input
   var searchBox = document.createElement('input');
   setAttributes(searchBox, {'type': 'text', 'class': 'column-search', 'placeholder': 'search'});
-  searchBox.addEventListener('input', (event) => {
-    applyActions(columnNo);
-  });
-  headerActions.appendChild(searchBox);
+  applyActionsInputs.push(searchBox);
+
   
   // Sort button
   var sortButton = document.createElement('input');
@@ -90,25 +88,26 @@ function generateColumnTools(type, columnNo) {
   sortButton.addEventListener('click', (event) => {
     sortTable(null, columnNo, true);
   });
-  headerActions.appendChild(sortButton);
   
   // Min/max inputs
   if (type == 'numeric') {
     var minBox = document.createElement('input');
     setAttributes(minBox, {'type': 'text', 'class': 'column-min', 'placeholder': 'min'});
-    minBox.addEventListener('input', (event) => {
-      applyActions(columnNo);
-    });
-    headerActions.appendChild(minBox);
+    applyActionsInputs.push(minBox);
     
     var maxBox = document.createElement('input');
     setAttributes(maxBox, {'type': 'text', 'class': 'column-max', 'placeholder': 'max'});
-    maxBox.addEventListener('input', (event) => {
-      applyActions(columnNo);
-    });
-    headerActions.appendChild(maxBox);
+    applyActionsInputs.push(maxBox);
   }
   
+  for (input in applyActionsInputs) {
+    input.addEventListener('keyup', (event) => {
+      applyActions();
+    });
+    headerActions.appendChild(input);
+  }
+
+  headerActions.appendChild(sortButton);
   return headerActions;
 }
 
@@ -210,4 +209,9 @@ function updateTable(tableData) {
     });
     tableBody.appendChild(tr);
   });
+  if (tableBody.innerHTML == "") {
+    noresults = document.createElement('div');
+    noresults.textContent = "No Results";
+    tableBody.appendChild(noResults);
+  }
 }
