@@ -62,6 +62,7 @@ function clearInputs() {
 
 function applyActions() {
   var activeTableData = structuredClone(allTableData);
+  var sortColumn = null;
   
   for (i in actionData) {
     var columnActions = getColumnActions(i);
@@ -73,13 +74,14 @@ function applyActions() {
     if (columnActions.min != null | columnActions.max != null ) {
       activeTableData = clipTable(activeTableData, i, columnActions.min, columnActions.max);
     }
-    
-    if (columnActions.sorted) {
-      sortTable(activeTableData, i, false);
-    } else {
-      updateTable(activeTableData);
-    }
+    if (columnActions.sorted) { sortColumn = i; }
   }
+  if (sortColumn != null) {
+    sortTable(activeTableData, sortColumn, false);
+  }
+  
+  updateTable(activeTableData);
+
 }
 
 function setAttributes(element, attributes) {
@@ -219,6 +221,7 @@ function table2data(tableBody) {
 }
 
 function updateTable(tableData) {
+  
   headers.forEach((cell, i) => {
     if (actionData[i].sorted) {
       cell.className = "sorted";
@@ -246,5 +249,10 @@ function updateTable(tableData) {
     noResults.textContent = "No Results";
     noResults.className = "no-results";
     tableWrapper.appendChild(noResults);
+  } else {
+    let noResults = document.querySelector('.no-results');
+    if (noResults != null) {
+      noResults.parentNode.removeChild(noResults);
+    }
   }
 }
