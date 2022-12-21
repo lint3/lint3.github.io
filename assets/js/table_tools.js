@@ -15,8 +15,8 @@ tableWrapper.prepend(toolsButton);
 
 function ColumnDataTemplate() {
   this.query = '';
-  this.min = null;
-  this.max = null;
+  this.min = '';
+  this.max = '';
   this.sorted = false;
   this.sortAsc = true;
   this.dataType = 'alpha';
@@ -233,7 +233,7 @@ function updateTable(tableData) {
     } else {
       headers[i].querySelector('.column-sort').value = 'sort';
     }
-    if (actionData[i].min != null | actionData[i].max != null | actionData[i].query != "") {
+    if (actionData[i].min != "" | actionData[i].max != "" | actionData[i].query != "") {
       cell.classList.add("filtered");
     }
   });
@@ -248,7 +248,7 @@ function updateTable(tableData) {
       if (actionData[j].sorted) {
         td.classList.add("sorted");
       }
-      if (actionData[j].min != null | actionData[j].max != null | actionData[j].query != "") {
+      if (actionData[j].min != "" | actionData[j].max != "" | actionData[j].query != "") {
         td.classList.add("filtered");
       }
       tr.appendChild(td);
