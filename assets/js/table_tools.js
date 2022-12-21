@@ -34,7 +34,7 @@ function addTools() {
   // Add tools UI to each header cell
   table.querySelectorAll('th')
     .forEach((element, columnNo) => {
-      element.prepend(generateColumnTools(actionData[columnNo].dataType, columnNo));
+      element.appendChild(generateColumnTools(actionData[columnNo].dataType, columnNo));
     });
 }
 
@@ -81,12 +81,6 @@ function generateColumnTools(type, columnNo) {
   setAttributes(headerActions, {'class': 'header-actions'});
   var applyActionsInputs = [];
   
-  // Search filter input
-  var searchBox = document.createElement('input');
-  setAttributes(searchBox, {'type': 'text', 'class': 'column-search', 'placeholder': 'search'});
-  applyActionsInputs.push(searchBox);
-
-  
   // Sort button
   var sortButton = document.createElement('input');
   setAttributes(sortButton, {'type': 'button', 'value': 'sort', 'class': 'column-sort'});
@@ -103,6 +97,12 @@ function generateColumnTools(type, columnNo) {
     var maxBox = document.createElement('input');
     setAttributes(maxBox, {'type': 'text', 'class': 'column-max', 'placeholder': 'max'});
     applyActionsInputs.push(maxBox);
+    
+  } else {
+    // Search filter input
+    var searchBox = document.createElement('input');
+    setAttributes(searchBox, {'type': 'text', 'class': 'column-search', 'placeholder': 'search'});
+    applyActionsInputs.push(searchBox);
   }
   
   for (input of applyActionsInputs) {
