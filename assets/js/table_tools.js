@@ -3,10 +3,16 @@ const table = document.querySelector('.ttools');
 
 const headers = table.querySelectorAll('th');
 const tableBody = table.querySelector('tbody');
+const tableWrapper = document.querySelector('table-wrapper');
 const allTableData = table2data(tableBody);
 var lastActiveTableData = structuredClone(allTableData);
 
 var actionData = {lastActiveColumn: 0};
+
+var toolsButton = document.createElement('input');
+setAttributes(toolsButton, {'type': 'button', 'value': 'Filter, Sort, Etc.', 'id': 'tools-button'});
+toolsButton.addEventListener('click', (event) => { addTools(); });
+tableWrapper.appendChild(toolsButton);
 
 function ColumnDataTemplate() {
   this.query = '';
@@ -17,20 +23,21 @@ function ColumnDataTemplate() {
   this.dataType = 'alpha';
 };
 
-for (let i = 0; i < headers.length; i++) {
-  var data = new ColumnDataTemplate();
-  actionData[i] = data;
-  actionData[i].dataType = headers[i].getAttribute('datatype');
+function addTools() {
+  
+  for (let i = 0; i < headers.length; i++) {
+    var data = new ColumnDataTemplate();
+    actionData[i] = data;
+    actionData[i].dataType = headers[i].getAttribute('datatype');
+  }
+
+
+  // Add tools UI to each header cell
+  table.querySelectorAll('th')
+    .forEach((element, columnNo) => {
+      element.prepend(generateColumnTools(actionData[columnNo].dataType, columnNo));
+    });
 }
-
-
-// Add tools UI to each header cell
-table.querySelectorAll('th')
-  .forEach((element, columnNo) => {
-    element.prepend(generateColumnTools(actionData[columnNo].dataType, columnNo));
-  });
-
-
 
 function applyActions(activeColumn) {
   var columnActions = getColumnActions(activeColumn);
@@ -192,6 +199,7 @@ function updateTable(tableData) {
         cell.className = "sorted";
       } else {
         cell.className = "";
+      }
     })
   });
 }
