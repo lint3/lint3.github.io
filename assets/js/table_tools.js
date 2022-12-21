@@ -39,7 +39,7 @@ table.querySelectorAll('th')
 // Add tools UI to each header cell
 table.querySelectorAll('th')
   .forEach((element, columnNo) => {
-    element.prepend(generateColumnTools(table, actionData[columnNo].dataType, columnNo));
+    element.prepend(generateColumnTools(actionData[columnNo].dataType, columnNo));
   });
 
 
