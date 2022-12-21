@@ -57,6 +57,7 @@ function clearInputs() {
     actionData[i] = new ColumnDataTemplate();
     actionData[i].dataType = headers[i].getAttribute('datatype');
   }
+  updateTable(allTableData);
 }
 
 function applyActions() {
@@ -142,7 +143,7 @@ function generateColumnTools(type, columnNo) {
 function filterTable(tableData, col, query) {
   var result = [];
   for (let i = 0; i < tableData.length; i++) {
-    if (tableData[i][col].includes(query)) {
+    if (tableData[i][col].toLowerCase().includes(query.toLowerCase())) {
       result.push(tableData[i]);
     }
   }
