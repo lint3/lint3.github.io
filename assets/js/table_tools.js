@@ -59,7 +59,7 @@ function applyActions(activeColumn) {
     clipTable(activeTableData, activeColumn, columnActions.min, columnActions.max);
     lastActiveTableData = structuredClone(activeTableData);
   }
-  sortTable(activeColumn, false)
+  activeTableData = sortTable(activeColumn, false)
   updateTable(activeTableData);
 }
 
@@ -154,6 +154,8 @@ function sortTable(col, buttAction) {
       return -1;
     });
   }
+  
+  return tableData;
 }
 
 
