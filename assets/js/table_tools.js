@@ -118,11 +118,16 @@ function filterTable(tableData, col, query) {
 
 function clipTable(tableData, col, min, max) {
   var result = [];
+  var minF = parseFloat(min);
+  var maxF = parseFloat(max);
+  
   for (let i = 0; i < tableData.length; i++) {
+    
     let value = parseFloat(tableData[i][col]);
-    if (value >= min & value <= max) {
+    if ((isNaN(minF) | value >= minF ) & (isNaN(maxF) | value <= maxF)) {
       result.push(tableData[i]);
     }
+    
   }
   return result;
 }
