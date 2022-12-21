@@ -3,14 +3,14 @@ const table = document.querySelector('.ttools');
 
 const headers = table.querySelectorAll('th');
 const tableBody = table.querySelector('tbody');
-const tableWrapper = document.querySelector('table-wrapper');
+const tableWrapper = document.querySelector('.table-wrapper');
 const allTableData = table2data(tableBody);
 var lastActiveTableData = structuredClone(allTableData);
 
 var actionData = {lastActiveColumn: 0};
 
 var toolsButton = document.createElement('input');
-setAttributes(toolsButton, {'type': 'button', 'value': 'Filter, Sort, Etc.', 'id': 'tools-button'});
+setAttributes(toolsButton, {'type': 'button', 'value': 'Filter, Sort, Etc.', 'class': 'tools-button'});
 toolsButton.addEventListener('click', (event) => { addTools(); });
 tableWrapper.appendChild(toolsButton);
 
