@@ -40,7 +40,7 @@ table.querySelectorAll('th')
 table.querySelectorAll('th')
   .forEach((element, columnNo) => {
     element.prepend(generateColumnTools(table, actionData[columnNo].dataType, columnNo));
-  }
+  });
 
 
 
