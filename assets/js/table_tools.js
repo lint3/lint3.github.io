@@ -54,7 +54,7 @@ function applyActions(activeColumn) {
     activeTableData = clipTable(activeTableData, activeColumn, columnActions.min, columnActions.max);
     lastActiveTableData = structuredClone(activeTableData);
   }
-  sortTable(activeColumn, false)
+  sortTable(tableData, activeColumn, false)
   
 }
 
@@ -88,7 +88,7 @@ function generateColumnTools(type, columnNo) {
   var sortButton = document.createElement('input');
   setAttributes(sortButton, {'type': 'button', 'value': 'sort', 'class': 'column-sort'});
   sortButton.addEventListener('click', (event) => {
-    sortTable(columnNo, true);
+    sortTable(null, columnNo, true);
   });
   headerActions.appendChild(sortButton);
   
@@ -132,7 +132,7 @@ function clipTable(tableData, col, min, max) {
   return result;
 }
 
-function sortTable(col, buttAction) {
+function sortTable(tableData, col, buttAction) {
   // If button clicked and we had already sorted on this column, toggle sort asc/desc
   var sortAsc = actionData[col].sortAsc ^ (buttAction & actionData[col].sorted);
   for (let i = 0; i < headers.length; i++) {
@@ -141,7 +141,9 @@ function sortTable(col, buttAction) {
   actionData[col].sorted = true;
   actionData[col].sortAsc = sortAsc;
   
-  var tableData = table2data(tableBody);
+  if (tableData == null) {
+    tableData = table2data(tableBody);
+  }
 
   if (actionData[col].dataType == "numeric") {
     tableData.sort((a, b) => {
