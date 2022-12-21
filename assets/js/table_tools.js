@@ -228,9 +228,9 @@ function updateTable(tableData) {
     if (actionData[i].sorted) {
       cell.classList.add("sorted");
       if (actionData[i].sortAsc) {
-        headers[i].querySelector('.column-sort').value = 'sort &#9650;';
+        headers[i].querySelector('.column-sort').value = 'sort ▲';
       } else {
-        headers[i].querySelector('.column-sort').value = 'sort &#9660;';
+        headers[i].querySelector('.column-sort').value = 'sort ▼';
       }
     }
     if (actionData[i].min != null | actionData[i].max != null | actionData[i].query != "") {
