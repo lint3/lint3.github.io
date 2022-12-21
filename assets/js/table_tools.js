@@ -41,7 +41,7 @@ function addTools() {
 
 function applyActions(activeColumn) {
   var columnActions = getColumnActions(activeColumn);
-  if (activeColumn == actions.lastActiveColumn) {
+  if (activeColumn == actionData.lastActiveColumn) {
     // We don't need to recompute everything, just narrow lastActiveTableData using activeColumn's params
     var activeTableData = structuredClone(lastActiveTableData);
     
