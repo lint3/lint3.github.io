@@ -17,7 +17,7 @@ function ColumnDataTemplate() {
   this.dataType = 'alpha';
 };
 
-for (i in headers) {
+for (let i = 0; i < headers.length; i++) {
   var data = new ColumnDataTemplate();
   actionData[i] = data;
   actionData[i].dataType = headers[i].getAttribute('datatype');
