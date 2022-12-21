@@ -101,7 +101,7 @@ function generateColumnTools(type, columnNo) {
     applyActionsInputs.push(maxBox);
   }
   
-  for (input in applyActionsInputs) {
+  for (input of applyActionsInputs) {
     input.addEventListener('keyup', (event) => {
       applyActions();
     });
