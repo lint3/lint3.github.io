@@ -1,5 +1,5 @@
 
-const table = document.querySelector('.ttools');
+const table = document.querySelector('.ttools > table');
 
 const headers = table.querySelectorAll('th');
 const tableBody = table.querySelector('tbody');
@@ -128,6 +128,7 @@ function filterTable(tableData, col, query) {
       result.push(tableData[i]);
     }
   }
+  return result;
 }
 
 function clipTable(tableData, col, min, max) {
