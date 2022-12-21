@@ -54,7 +54,7 @@ function applyActions(activeColumn) {
     activeTableData = clipTable(activeTableData, activeColumn, columnActions.min, columnActions.max);
     lastActiveTableData = structuredClone(activeTableData);
   }
-  sortTable(tableData, activeColumn, false)
+  sortTable(activeTableData, activeColumn, false)
   
 }
 
