@@ -50,8 +50,8 @@ function applyActions(activeColumn) {
   } else {
     // We have to recompute everything
     var activeTableData = structuredClone(allTableData);
-    filterTable(activeTableData, activeColumn, columnActions.query);
-    clipTable(activeTableData, activeColumn, columnActions.min, columnActions.max);
+    activeTableData = filterTable(activeTableData, activeColumn, columnActions.query);
+    activeTableData = clipTable(activeTableData, activeColumn, columnActions.min, columnActions.max);
     lastActiveTableData = structuredClone(activeTableData);
   }
   sortTable(activeColumn, false)
@@ -79,7 +79,7 @@ function generateColumnTools(type, columnNo) {
   // Search filter input
   var searchBox = document.createElement('input');
   setAttributes(searchBox, {'type': 'text', 'class': 'column-search', 'placeholder': 'search'});
-  searchBox.addEventListener('change', (event) => {
+  searchBox.addEventListener('input', (event) => {
     applyActions(columnNo);
   });
   headerActions.appendChild(searchBox);
@@ -96,14 +96,14 @@ function generateColumnTools(type, columnNo) {
   if (type == 'numeric') {
     var minBox = document.createElement('input');
     setAttributes(minBox, {'type': 'text', 'class': 'column-min', 'placeholder': 'min'});
-    minBox.addEventListener('change', (event) => {
+    minBox.addEventListener('input', (event) => {
       applyActions(columnNo);
     });
     headerActions.appendChild(minBox);
     
     var maxBox = document.createElement('input');
     setAttributes(maxBox, {'type': 'text', 'class': 'column-max', 'placeholder': 'max'});
-    maxBox.addEventListener('change', (event) => {
+    maxBox.addEventListener('input', (event) => {
       applyActions(columnNo);
     });
     headerActions.appendChild(maxBox);
@@ -112,8 +112,8 @@ function generateColumnTools(type, columnNo) {
   return headerActions;
 }
 
-function filterTable(col) {
-  
+function filterTable(tableData, col, query) {
+  return tableData;
 }
 
 function clipTable(tableData, col, min, max) {
@@ -124,7 +124,7 @@ function clipTable(tableData, col, min, max) {
       result.push(tableData[i]);
     }
   }
-  tableData = result;
+  return result;
 }
 
 function sortTable(col, buttAction) {
