@@ -14,10 +14,16 @@ th, td {
   border: 1px solid #AAA;
 }
 
-table.sortable th.sorted {
+table.ttools th.sorted {
   background-color: #B0BADF;
 }
 
-table.sortable td.sorted {
+table.ttools td.sorted {
   background-color: #DADEED;
+}
+
+table.ttools > .tools-button,
+table.ttools > .clear-input {
+  float: right;
+  margin: 0.2em;
 }
