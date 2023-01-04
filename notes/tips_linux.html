@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Tips</title>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/assets/favicon.ico">
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/index.html" class="logo">JC</a>
+      <a href="/index.html">Index</a>
+      <a href="/projects.html">Projects</a>
+      <a href="/trips.html">Trips</a>
+      <a href="/notes.html">Notes</a>
+      <a href="/about.html">Jacob</a>
+    </nav>
+    <h1>Linux Reference</h1>
+    <p>I'm tired of having to web search for stupid simple things that I already know but forgot the command or location of the config file. Why doesn't something like this exist already!?</p>
+    <p>See Also: <a href="/projects/linux_fix.html">Linux Fix</a></p>
+    <h2>Vim</h2>
+      <ul>
+        <li>Write to file after forgetting to <code>vim</code> using <code>sudo</code>:
+          <pre class="code">:w !sudo tee %</pre></li>
+      </ul>
+    
+    <h2>System Config Files</h2>
+      <ul>
+        <li>Mount disks on boot - <code>/etc/fstab</code></li>
+        <li>Docker
+          <ul>
+            <li>Docker Compose - <code>~/docker/docker-compose.yml</code></li>
+          </ul>
+      </ul>
+      
+    <h2>User Config Files</h2>
+      <ul>
+        <li>User created binaries/scripts - <code>/usr/local/bin</code></li>
+      </ul>
+    
+    <h2>Get Info</h2>
+      <ul>
+      
+        <li>Hardware
+          <ul>
+            <li>CPU - <code>lscpu</code></li>
+            <li>Block Device (storage) - <code>lsblk</code>
+              <ul>
+                <li>Partition UUID - <code>blkid</code></li>
+                <li>
+              </ul></li>
+            <li>Memory - <code>lsmem</code></li>
+            <li>USB Devices - <code>lsusb</code></li>
+          </ul></li>
+          
+        <li>Bash History - <code>~/.bash_history</code></li>
+      </ul>
+  </body>
+</html>
