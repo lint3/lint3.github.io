@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Table Tools</title>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/assets/favicon.ico">
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/index.html" class="logo">JC</a>
+      <a href="/index.html">Index</a>
+      <a href="/projects.html">Projects</a>
+      <a href="/trips.html">Trips</a>
+      <a href="/notes.html">Notes</a>
+      <a href="/about.html">Jacob</a>
+    </nav>
+    <h1><code>table_tools.js</code></a></h1>
+    <p>A fun little exercise in pure JavaScript. Parse a plain HTML table, process it, and rearrange instantly. I'm a big fan of <a href="https://www.digikey.com/en/products/filter/transistors-fets-mosfets-single/278">DigiKey</a>'s parametric search.</p>
+    <h2><a href="/notes/youtube_channels.html">DEMO 1</a> / <a href="/projects/st-a410.html#parts">DEMO 2</a></h2>
+    
+    <h2>Features</h2>
+    <ul>
+      <li>Sane sorting logic</li>
+      <li>Search or min-max depending on column content</li>
+      <li>Hide tools until tools button is clicked</li>
+      <li>Instantly clear all filters</li>
+      <li>Visual indicator of what columns are being manipulated</li>
+      <li>Combine multiple filter/sort operations</li>
+    </ul>
+    
+    <h2>Use It</h2>
+    <p><a href="/assets/js/table_tools.js">Get the code</a></p>
+    <p>To use it, just add a <code>&lt;div class="table-wrapper ttools"&gt;</code> wrapping your table element. To headers, specify data type using <code>datatype="alpha"</code> or <code>"numeric"</code>. That's it.</p>
+    
+    <h2>Alternatives</h2>
+    <p>Yes, I know there are many (probably more well-written) alternatives out there. Some older than time.</p>
+  </body>
+</html>

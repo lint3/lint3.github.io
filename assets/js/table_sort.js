@@ -1,4 +1,3 @@
-// Adopted from user "Tom P" on Stack Overflow: https://stackoverflow.com/a/57080195
 
 const table = document.querySelector('.sortable');
 
