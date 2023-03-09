@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vector Tiles</title>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/assets/favicon.ico">
+    
+    <script src='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js'></script>
+    <link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/index.html" class="logo">JC</a>
+      <a href="/index.html">Index</a>
+      <a href="/projects.html">Projects</a>
+      <a href="/trips.html">Trips</a>
+      <a href="/notes.html">Notes</a>
+      <a href="/about.html">Jacob</a>
+    </nav>
+    <p>Using <a href="https://maplibre.org/maplibre-gl-js-docs/">MapLibre GL JS</a>.</p>
+    <details class="section-expander">
+      <summary>Basic World Map</summary>
+      <div id='map-basic' style='width: 100%; height: 300px;'></div>
+      <script>
+      var map = new maplibregl.Map({
+        container: 'map-basic',
+        style: 'https://demotiles.maplibre.org/style.json', // stylesheet location
+        center: [-74.5, 40], // starting position [lng, lat]
+        zoom: 2 // starting zoom
+      });
+      </script>
+    </details>
+  </body>
+</html>
