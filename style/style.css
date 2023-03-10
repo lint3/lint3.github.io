@@ -191,9 +191,9 @@ a:focus.fancy {
   height: 16em;
 }
 
-.skinnyboi {
+.tallboi {
   width: auto;
-  margin: auto;
+  margin: 1em auto auto auto;
   display: block;
 }
 
