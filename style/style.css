@@ -1,5 +1,5 @@
 /*
- * Colors
+ = *==========  COLORS  ===========
  */
  
 :root {
@@ -13,7 +13,9 @@
   --color-text-std: #242424;
 }
 
-
+/*
+ *==========  ALL  ===========
+ */
 
 @font-face {
   src: url("/assets/fonts/SourceCodePro-Black.ttf") format("truetype");
@@ -55,6 +57,18 @@ body.kyloren {
 
 p {
   margin-top: 0.5em;
+}
+
+code, pre.codeblock, pre.code {
+  background-color: #DBDBDB;
+  border-radius: 2px;
+  padding: 0.1em 0.3em;
+  border: 1px solid #BFBFBF;
+}
+
+pre.codeblock, pre.code {
+  padding: 0.5em 0.8em;
+  border-radius: 4px;
 }
 
 /*
@@ -191,6 +205,23 @@ img {
   margin-top: 1rem;
 }
 
+.img-explainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media only screen and (min-width: 48em) {
+  .img-explainer {
+    flex-wrap: nowrap;
+  }
+}
+
+.img-explainer>img {
+  border: 1px solid #888;
+  border-radius: 4px;
+  margin: 1em;
+  object-fit: contain;
+}
+
 /*
  ===========  NAV LIST  ===========
 */
@@ -290,18 +321,6 @@ img {
 
 
 
-code, pre.codeblock, pre.code {
-  background-color: #DBDBDB;
-  border-radius: 2px;
-  padding: 0.1em 0.3em;
-  border: 1px solid #BFBFBF;
-}
-
-pre.codeblock, pre.code {
-  padding: 0.5em 0.8em;
-  border-radius: 4px;
-}
-
 span.buttbox {
   float: right;
 }
@@ -371,24 +390,4 @@ hr {
   border-radius: 4px;
   color: #000000;
 }
-
-.img-explainer {
-  display: flex;
-  flex-wrap: wrap;
-}
-@media only screen and (min-width: 48em) {
-  .img-explainer {
-    flex-wrap: nowrap;
-  }
-}
-
-.img-explainer>img {
-  border: 1px solid #888;
-  border-radius: 4px;
-  margin: 1em;
-  object-fit: contain;
-}
-
-
-
 
