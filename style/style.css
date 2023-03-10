@@ -191,6 +191,12 @@ a:focus.fancy {
   height: 16em;
 }
 
+.skinnyboi {
+  width: auto;
+  margin: auto;
+  display: block;
+}
+
 img {
   margin-top: 1em;
   width: 100%;
