@@ -127,7 +127,7 @@ function display_gps(elt) {
   
   var layerControl = L.control.layers(maplayers).addTo(map);
   
-  add_all_gpx(get_gpx_urls(), map, layerControl);
+  // add_all_gpx(get_gpx_urls(), map, layerControl);
   
   if(elt.classList.contains("topo")) {
     otm.addTo(map);
@@ -135,4 +135,4 @@ function display_gps(elt) {
   }
 }
 
-// display_gps(document.getElementById('map-embed'));
+display_gps(document.getElementById('map-embed'));
