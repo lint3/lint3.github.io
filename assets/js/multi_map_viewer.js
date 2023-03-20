@@ -1,28 +1,14 @@
 // https://github.com/tinuzz/leaflet-messagebox/
 
-function add_mouseover() {
-  map_items = []
-  for (element of document.getElementsByClassName("hikes-list")) {
-    for (item of element.children) {
-      map_items.push(item);
-    }
-  }
-  
-  for (item of map_items) {
-    item.addEventListener("mouseenter", (event) => {
-      console.log("Mouse Enter");
-    });
-    item.addEventListener("mouseout", (event) => {
-      console.log("Mouse Out");
-    });
-  }
+function resetMap(map) {
+  map.setView([41.8, -111.6], 12);
 }
 
-function get_gpx_urls() {
+function get_gpx_items() {
   datas = [];
   for (element of document.getElementsByClassName("hikes-list")) {
     for (item of element.children) {
-      datas.push(item.getAttribute("data"));
+      datas.push(item);
     }
   }
   return datas;
@@ -30,8 +16,8 @@ function get_gpx_urls() {
 
 function add_all_gpx(gpxes, add_to_map, add_to_layer_control) {
   
-  for (url of gpxes) {
-      new L.GPX(url, {
+  for (gpxItem of gpxes) {
+      new L.GPX(gpxItem.getAttribute('data'), {
         async: true,
         marker_options: {
           startIconUrl: '/assets/icons/pin-icon-start.png',
@@ -46,7 +32,16 @@ function add_all_gpx(gpxes, add_to_map, add_to_layer_control) {
         add_to_map.fitBounds(gpx.getBounds());
         add_to_layer_control.addOverlay(gpx, gpx.get_name());
       }).addTo(add_to_map);
+      
+        gpxItem.addEventListener("mouseenter", (event) => {
+          add_to_map.fitBounds(gpx.getBounds());
+        });
+        gpxItem.addEventListener("mouseout", (event) => {
+          resetMap(add_to_map);
+        });
   }
+  
+  resetMap(add_to_map);
 }
 
 L.Control.Messagebox = L.Control.extend({
@@ -92,7 +87,7 @@ L.control.messagebox = function (options) {
   return new L.Control.Messagebox(options);
 };
 
-function display_gps(elt) {
+function display_map(elt) {
   if (!elt) return;
   
   var mapid = elt.getAttribute('data-map-target');
@@ -146,12 +141,14 @@ function display_gps(elt) {
   
   var layerControl = L.control.layers(maplayers).addTo(map);
   
-  add_all_gpx(get_gpx_urls(), map, layerControl);
+  add_all_gpx(get_gpx_items(), map, layerControl);
   
   if(elt.classList.contains("topo")) {
     otm.addTo(map);
     osm.remove();
   }
+  
+  add_mouseover(map);
 }
 
-display_gps(document.getElementById('map-embed'));
+display_map(document.getElementById('map-embed'));
