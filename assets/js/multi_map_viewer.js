@@ -25,6 +25,7 @@ function add_all_gpx(gpxes, add_to_map, add_to_layer_control) {
         },
       }).on('loaded', function(e) {
         var gpx = e.target;
+        map.fitBounds(gpx.getBounds());
         add_to_layer_control.addOverlay(gpx, gpx.get_name());
       }).addTo(add_to_map);
   }
@@ -127,7 +128,7 @@ function display_gps(elt) {
   
   var layerControl = L.control.layers(maplayers).addTo(map);
   
-  add_all_gpx(['/assets/gpx/2022-07-15.gpx'], map, layerControl);
+  add_all_gpx(get_gpx_urls(), map, layerControl);
   
   if(elt.classList.contains("topo")) {
     otm.addTo(map);
