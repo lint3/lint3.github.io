@@ -40,8 +40,6 @@ function add_all_gpx(gpxes, add_to_map, add_to_layer_control) {
         resetMap(add_to_map);
       });
   }
-  
-  resetMap(add_to_map);
 }
 
 L.Control.Messagebox = L.Control.extend({
@@ -147,7 +145,7 @@ function display_map(elt) {
     otm.addTo(map);
     osm.remove();
   }
-  
+  resetMap(map);
 }
 
 display_map(document.getElementById('map-embed'));
