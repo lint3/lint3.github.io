@@ -1,7 +1,7 @@
 // https://github.com/tinuzz/leaflet-messagebox/
 
 function resetMap(map) {
-  map.setView([41.8, -111.6], 12);
+  map.setView([41.8, -111.6], 10);
 }
 
 function get_gpx_items() {
@@ -17,7 +17,7 @@ function get_gpx_items() {
 function add_all_gpx(gpxes, add_to_map, add_to_layer_control) {
   
   for (gpxItem of gpxes) {
-      new L.GPX(gpxItem.getAttribute('data'), {
+      gpx = new L.GPX(gpxItem.getAttribute('data'), {
         async: true,
         marker_options: {
           startIconUrl: '/assets/icons/pin-icon-start.png',
