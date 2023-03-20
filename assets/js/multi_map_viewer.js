@@ -16,6 +16,7 @@ function add_mouseover() {
       console.log("Mouse Out");
     });
   }
+}
 
 function get_gpx_urls() {
   datas = [];
