@@ -107,7 +107,7 @@ function display_map(elt) {
   
   var map = L.map(mapid, {
     layers: [osm]
-  });
+  }).setView([41.8, -111.6], 10, {duration:0.4});
   
   var options = { timeout: 7200000 };
   var box = L.control.messagebox(options).addTo(map);
