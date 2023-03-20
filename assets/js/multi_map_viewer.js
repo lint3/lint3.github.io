@@ -1,7 +1,7 @@
 // https://github.com/tinuzz/leaflet-messagebox/
 
 function resetMap(map) {
-  map.setView([41.8, -111.6], 10);
+  map.flyTo([41.8, -111.6], 10);
 }
 
 function get_gpx_items() {
@@ -17,28 +17,30 @@ function get_gpx_items() {
 function add_all_gpx(gpxes, add_to_map, add_to_layer_control) {
   
   for (gpxItem of gpxes) {
-      gpx = new L.GPX(gpxItem.getAttribute('data'), {
-        async: true,
-        marker_options: {
-          startIconUrl: '/assets/icons/pin-icon-start.png',
-          endIconUrl: '/assets/icons/pin-icon-end.png',
-          shadowUrl: '/assets/icons/pin-shadow.png',
-          wptIconUrls: {
-            '': '/assets/icons/pin-icon-wpt.png'
-          }
-        },
-      }).on('loaded', function(e) {
-        var gpx = e.target;
-        add_to_map.fitBounds(gpx.getBounds());
-        add_to_layer_control.addOverlay(gpx, gpx.get_name());
-      }).addTo(add_to_map);
-      
-        gpxItem.addEventListener("mouseenter", (event) => {
-          add_to_map.fitBounds(gpx.getBounds());
-        });
-        gpxItem.addEventListener("mouseout", (event) => {
-          resetMap(add_to_map);
-        });
+    let gpx = new L.GPX(gpxItem.getAttribute('data'), {
+      async: true,
+      marker_options: {
+        startIconUrl: '/assets/icons/pin-icon-start.png',
+        endIconUrl: '/assets/icons/pin-icon-end.png',
+        shadowUrl: '/assets/icons/pin-shadow.png',
+        wptIconUrls: {
+          '': '/assets/icons/pin-icon-wpt.png'
+        }
+      },
+    }).on('loaded', function(e) {
+      var gpx = e.target;
+      add_to_map.fitBounds(gpx.getBounds());
+      add_to_layer_control.addOverlay(gpx, gpx.get_name());
+    }).addTo(add_to_map);
+    
+      gpxItem.addEventListener("mouseenter", (event) => {
+        add_to_map.flyToBounds(gpx.getBounds());
+        console.log("Mouse enter");
+      });
+      gpxItem.addEventListener("mouseout", (event) => {
+        resetMap(add_to_map);
+        console.log("Mouse out");
+      });
   }
   
   resetMap(add_to_map);
@@ -148,7 +150,6 @@ function display_map(elt) {
     osm.remove();
   }
   
-  add_mouseover(map);
 }
 
 display_map(document.getElementById('map-embed'));
