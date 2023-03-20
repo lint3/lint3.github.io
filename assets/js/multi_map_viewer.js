@@ -76,9 +76,8 @@ L.control.messagebox = function (options) {
 function display_gps(elt) {
   if (!elt) return;
   
-  var url = elt.getAttribute('data-gpx-source');
   var mapid = elt.getAttribute('data-map-target');
-  if (!url || !mapid) return;
+  if (!mapid) return;
   
   function _t(t) { return elt.getElementsByTagName(t)[0]; }
   function _c(c) { return elt.getElementsByClassName(c)[0]; }
@@ -136,4 +135,4 @@ function display_gps(elt) {
   }
 }
 
-display_gps(document.getElementById('map-embed'));
+// display_gps(document.getElementById('map-embed'));
