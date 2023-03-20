@@ -1,7 +1,7 @@
 // https://github.com/tinuzz/leaflet-messagebox/
 
 function resetMap(map) {
-  map.flyTo([41.8, -111.6], 10);
+  map.flyTo([41.8, -111.6], 10, {duration:0.2});
 }
 
 function get_gpx_items() {
@@ -34,12 +34,10 @@ function add_all_gpx(gpxes, add_to_map, add_to_layer_control) {
     }).addTo(add_to_map);
     
       gpxItem.addEventListener("mouseenter", (event) => {
-        add_to_map.flyToBounds(gpx.getBounds());
-        console.log("Mouse enter");
+        add_to_map.flyToBounds(gpx.getBounds(), {duration:0.2});
       });
       gpxItem.addEventListener("mouseout", (event) => {
         resetMap(add_to_map);
-        console.log("Mouse out");
       });
   }
   
