@@ -10,7 +10,7 @@ function get_gpx_urls() {
   return datas;
 }
 
-function add_all_gpx(gpxes, map) {
+function add_all_gpx(gpxes, map, layerControl) {
   
   for (url of gpxes) {
       new L.GPX(url, {
@@ -129,7 +129,7 @@ function display_gps(elt) {
   
   var layerControl = L.control.layers(maplayers).addTo(map);
   
-  add_all_gpx(get_gpx_urls(), map);
+  add_all_gpx(get_gpx_urls(), map, layerControl);
   
   if(elt.classList.contains("topo")) {
     otm.addTo(map);
