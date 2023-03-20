@@ -127,7 +127,7 @@ function display_gps(elt) {
   
   var layerControl = L.control.layers(maplayers).addTo(map);
   
-  // add_all_gpx(get_gpx_urls(), map, layerControl);
+  add_all_gpx(['/assets/gpx/2022-07-15.gpx'], map, layerControl);
   
   if(elt.classList.contains("topo")) {
     otm.addTo(map);
