@@ -1,5 +1,36 @@
 // https://github.com/tinuzz/leaflet-messagebox/
 
+function get_gpx_urls() {
+  datas = [];
+  for (element of document.getElementsByClassName("hikes-list")) {
+    for (item of element.children) {
+      datas.push(item.getAttribute("data"));
+    }
+  }
+  return datas;
+}
+
+function add_all_gpx(gpxes, map) {
+  
+  for (url of gpxes) {
+      new L.GPX(url, {
+        async: true,
+        marker_options: {
+          startIconUrl: '/assets/icons/pin-icon-start.png',
+          endIconUrl: '/assets/icons/pin-icon-end.png',
+          shadowUrl: '/assets/icons/pin-shadow.png',
+          wptIconUrls: {
+            '': '/assets/icons/pin-icon-wpt.png'
+          }
+        },
+      }).on('loaded', function(e) {
+        var gpx = e.target;
+        layerControl.addOverlay(gpx, gpx.get_name());
+      }).addTo(map);
+  }
+}
+    
+
 L.Control.Messagebox = L.Control.extend({
   options: {
     position: 'topleft',
@@ -75,8 +106,6 @@ function display_gps(elt) {
   map.scrollWheelZoom.disable();
   map.dragging.disable();
   
-
-  
   map.on('click', function() {
     
     if (map.scrollWheelZoom.enabled()) {
@@ -100,21 +129,7 @@ function display_gps(elt) {
   
   var layerControl = L.control.layers(maplayers).addTo(map);
   
-  new L.GPX(url, {
-    async: true,
-    marker_options: {
-      startIconUrl: '/assets/icons/pin-icon-start.png',
-      endIconUrl: '/assets/icons/pin-icon-end.png',
-      shadowUrl: '/assets/icons/pin-shadow.png',
-      wptIconUrls: {
-        '': '/assets/icons/pin-icon-wpt.png'
-      }
-    },
-  }).on('loaded', function(e) {
-    var gpx = e.target;
-    map.fitBounds(gpx.getBounds());
-    layerControl.addOverlay(gpx, gpx.get_name());
-  }).addTo(map);
+  add_all_gpx(get_gpx_urls(), map);
   
   if(elt.classList.contains("topo")) {
     otm.addTo(map);
