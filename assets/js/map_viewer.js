@@ -46,6 +46,7 @@ L.control.messagebox = function (options) {
 function display_gps(elt) {
   if (!elt) return;
   
+  
   var url = elt.getAttribute('data-gpx-source');
   var mapid = elt.getAttribute('data-map-target');
   if (!url || !mapid) return;
@@ -74,8 +75,6 @@ function display_gps(elt) {
   box.show( 'Click/tap to toggle interaction' );
   map.scrollWheelZoom.disable();
   map.dragging.disable();
-  
-
   
   map.on('click', function() {
     

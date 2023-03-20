@@ -10,7 +10,7 @@ function get_gpx_urls() {
   return datas;
 }
 
-function add_all_gpx(gpxes, map, layerControl) {
+function add_all_gpx(gpxes, add_to_map, add_to_layer_control) {
   
   for (url of gpxes) {
       new L.GPX(url, {
@@ -25,11 +25,10 @@ function add_all_gpx(gpxes, map, layerControl) {
         },
       }).on('loaded', function(e) {
         var gpx = e.target;
-        layerControl.addOverlay(gpx, gpx.get_name());
-      }).addTo(map);
+        add_to_layer_control.addOverlay(gpx, gpx.get_name());
+      }).addTo(add_to_map);
   }
 }
-    
 
 L.Control.Messagebox = L.Control.extend({
   options: {
