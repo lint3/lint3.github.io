@@ -1,5 +1,22 @@
 // https://github.com/tinuzz/leaflet-messagebox/
 
+function add_mouseover() {
+  map_items = []
+  for (element of document.getElementsByClassName("hikes-list")) {
+    for (item of element.children) {
+      map_items.push(item);
+    }
+  }
+  
+  for (item of map_items) {
+    item.addEventListener("mouseenter", (event) => {
+      console.log("Mouse Enter");
+    });
+    item.addEventListener("mouseout", (event) => {
+      console.log("Mouse Out");
+    });
+  }
+
 function get_gpx_urls() {
   datas = [];
   for (element of document.getElementsByClassName("hikes-list")) {
@@ -25,7 +42,7 @@ function add_all_gpx(gpxes, add_to_map, add_to_layer_control) {
         },
       }).on('loaded', function(e) {
         var gpx = e.target;
-        map.fitBounds(gpx.getBounds());
+        add_to_map.fitBounds(gpx.getBounds());
         add_to_layer_control.addOverlay(gpx, gpx.get_name());
       }).addTo(add_to_map);
   }
