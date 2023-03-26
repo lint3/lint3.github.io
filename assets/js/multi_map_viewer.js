@@ -1,7 +1,7 @@
 // https://github.com/tinuzz/leaflet-messagebox/
 
 function resetMap(map) {
-  map.flyTo([41.8, -111.6], 10, {duration:0.4});
+  map.flyTo([41.8, -111.6], 10, {duration:1});
 }
 
 function get_gpx_items() {
@@ -33,12 +33,14 @@ function add_all_gpx(gpxes, add_to_map, add_to_layer_control) {
       add_to_layer_control.addOverlay(gpx, gpx.get_name());
     }).addTo(add_to_map);
     
-      gpxItem.addEventListener("mouseenter", (event) => {
-        add_to_map.flyToBounds(gpx.getBounds(), {duration:0.4});
-      });
-      gpxItem.addEventListener("mouseout", (event) => {
-        resetMap(add_to_map);
-      });
+    
+    
+    gpxItem.addEventListener("mouseenter", (event) => {
+      add_to_map.flyToBounds(gpx.getBounds(), {duration:0.4});
+    });
+    gpxItem.addEventListener("mouseout", (event) => {
+      resetMap(add_to_map);
+    });
   }
 }
 
@@ -107,7 +109,7 @@ function display_map(elt) {
   
   var map = L.map(mapid, {
     layers: [osm]
-  }).setView([41.8, -111.6], 10, {duration:0.4});
+  }).setView([41.8, -111.6], 10, {duration:1});
   
   var options = { timeout: 7200000 };
   var box = L.control.messagebox(options).addTo(map);

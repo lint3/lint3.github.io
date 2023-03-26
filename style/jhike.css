@@ -1,0 +1,27 @@
+
+.hikes-wrapper {
+  display: flex;
+  justify-content: stretch;
+  flex-wrap: wrap-reverse;
+}
+
+#map-viewer {
+  position: sticky;
+  top: 0;
+}
+
+#map-embed {
+  flex-grow: 1;
+  margin-top: 0;
+  position: sticky;
+  top: 0;
+  min-width: 20em;
+}
+
+.hikes-list {
+  min-width: 20em;
+}
+
+@media only screen and (min-width: 48em) {
+  position: static;
+}
