@@ -1,4 +1,4 @@
-#page {
+#page, #container {
     border-radius: 2px;
     border: 1px solid black;
     padding: 4px;
@@ -7,9 +7,26 @@
 .group {
     border-radius: 2px;
     border: 1px solid #888;
+    margin: 2px;
     padding: 4px;
 }
 
 .group.and:before {
     content: "AND";
+}
+
+.group.or:before {
+    content: "OR";
+}
+
+.group.not:before {
+    content: "NOT";
+}
+
+.dragging {
+    opacity: 0.7;
+}
+
+.dragover {
+    background-color: purple;
 }
