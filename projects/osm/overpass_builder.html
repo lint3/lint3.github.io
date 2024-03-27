@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OQB</title>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="overpass_builder.css">
+    <link rel="icon" href="/assets/favicon.ico">
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/index.html" class="logo">JC</a>
+      <a href="/index.html">Index</a>
+      <a href="/projects.html">Projects</a>
+      <a href="/trips.html">Trips</a>
+      <a href="/notes.html">Notes</a>
+      <a href="/about.html">Jacob</a>
+    </nav>
+    
+    <h1>Overpass Query Builder</h1>
+    
+    <fieldset id="userinput">
+      <legend>Choose Constraints</legend>
+      
+      <div>
+        <label for="building-input">Building Destination:</label>
+        <input type="search" id="building-input" name="bldg">
+        <input type="button" id="randomize-building" value="Random">
+      </div>
+      
+      <div>
+        <label for="parking-pass">USU parking pass</label>
+        <select name="pass" id="parking-pass">
+          <option value="none">None</option>
+          <option value="blue">Blue</option>
+          <option value="yellow">Yellow</option>
+          <option value="gray">Gray</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="rich">Free parking only</label>
+        <input type="checkbox" id="rich" name="rich-textbox">
+      </div>
+    </fieldset>
+      
+      <div id="submit-button-wrapper" style="display: flex; height: 1.75em; margin-top: 0.2em;">
+        <input type="button" id="submit-button" value="Where do I park!?">
+      </div>
+    
+    <div id="page">
+      
+    </div>
+    
+    <script src="overpass_builder.js"></script>
+    
+  </body>
+</html>

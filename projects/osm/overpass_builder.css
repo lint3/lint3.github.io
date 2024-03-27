@@ -1,0 +1,15 @@
+#page {
+    border-radius: 2px;
+    border: 1px solid black;
+    padding: 4px;
+}
+
+.group {
+    border-radius: 2px;
+    border: 1px solid #888;
+    padding: 4px;
+}
+
+.group.and:before {
+    content: "AND";
+}
