@@ -20,40 +20,15 @@
     
     <h1>Overpass Query Builder</h1>
     
-    <fieldset id="userinput">
-      <legend>Choose Constraints</legend>
-      
-      <div>
-        <label for="building-input">Building Destination:</label>
-        <input type="search" id="building-input" name="bldg">
-        <input type="button" id="randomize-building" value="Random">
-      </div>
-      
-      <div>
-        <label for="parking-pass">USU parking pass</label>
-        <select name="pass" id="parking-pass">
-          <option value="none">None</option>
-          <option value="blue">Blue</option>
-          <option value="yellow">Yellow</option>
-          <option value="gray">Gray</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      
-      <div>
-        <label for="rich">Free parking only</label>
-        <input type="checkbox" id="rich" name="rich-textbox">
-      </div>
-    </fieldset>
-      
-      <div id="submit-button-wrapper" style="display: flex; height: 1.75em; margin-top: 0.2em;">
-        <input type="button" id="submit-button" value="Where do I park!?">
-      </div>
+
     
-    <div id="page">
-      
+    <div id="container">
+      <div>Draggable 1</div>
+      <div>Draggable 2</div>
+      <div>Draggable 3</div>
     </div>
     
+    <script src=" https://cdn.jsdelivr.net/npm/smooth-dnd@0.12.1/dist/index.min.js "></script>
     <script src="overpass_builder.js"></script>
     
   </body>
