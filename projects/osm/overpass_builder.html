@@ -6,6 +6,7 @@
     <title>OQB</title>
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="overpass_builder.css">
+    <link rel="stylesheet" href="dragStructure.css">
     <link rel="icon" href="/assets/favicon.ico">
   </head>
   <body>
@@ -20,11 +21,33 @@
     
     <h1>OQB</h1>
     
-
+    <div id="prefix-prefs-form">
+      <label for="output-type">Output as </label>
+      <select name="output-type" id="output-type-selector">
+        <option value="json">JSON</option>
+        <option value="csv">CSV</option>
+      </select>
+      
+      <label for="timeout">Timeout</label>
+      <select name="timeout" id="timeout-selector">
+        <option value="10">10s</option>
+        <option value="30" selected>30s</option>
+        <option value="60">60s</option>
+        <option value="0">None</option>
+      </select>
+    </div>
     
     <div id="query-builder-container"></div>
     
-    <script src="overpass_builder.js"></script>
+    <div id="post-prefs-form">
+      <input id="build-query-button" type="button" value="Build Query" />
+    </div>
+    
+    <pre id="query-results"></pre>
+    
+    <script src="dragStructure.js"></script>
+    <script src="overpass_builder_parser.js"></script>
+    <script src="overpass_builder_structure.js"></script>
     
   </body>
 </html>

@@ -10,8 +10,8 @@ function createLogicalGroup(logicType) {
     var typeSwitcher = document.createElement('select');
     typeSwitcher.setAttribute('class', 'logic-type-switcher');
     // TODO: Add logic type switcher
-    group.appendChild(createAddForm());
-    group.classList.add('logical');
+    group.appendChild(createMgmtForm(true));
+    group.classList.add('group-logical');
     group.classList.add(logicType);
     return group;
 }
@@ -20,34 +20,51 @@ function createRequirement(reqType) {
     // TODO: Add requirement type switcher
     var req = createDraggable(false);
     req.classList.add('requirement-' + reqType);
+    req.appendChild(createMgmtForm(false));
     req.appendChild(createTagForm());
     return req;
 }
 
-function createAddForm() {
+function createMgmtForm(childrenOk) {
     var formDiv = document.createElement('div');
     formDiv.classList.add('add-form');
     
-    var newReqButton = document.createElement('input');
-    newReqButton.setAttribute('type', 'button');
-    newReqButton.setAttribute('value', '+Req');
-    newReqButton.addEventListener('click', (event) => {
-        event.target.closest(".group").appendChild(createRequirement('tag'));
+    if (childrenOk) {
+        var newReqButton = document.createElement('input');
+        newReqButton.setAttribute('type', 'button');
+        newReqButton.setAttribute('value', '☑️');
+        newReqButton.setAttribute('title', 'Add requirement');
+        newReqButton.addEventListener('click', (event) => {
+            event.target.closest(".group").appendChild(createRequirement('tag'));
+        });
+        
+        var newLogicButton = document.createElement('input');
+        newLogicButton.setAttribute('type', 'button');
+        newLogicButton.setAttribute('value', '🔲');
+        newLogicButton.setAttribute('title', 'Add group');
+        newLogicButton.addEventListener('click', (event) => {
+            event.target.closest(".group").appendChild(createLogicalGroup('or'));
+        });
+        
+        formDiv.appendChild(newReqButton);
+        formDiv.appendChild(newLogicButton);
+    }
+    
+    var deleteButton = document.createElement('input');
+    deleteButton.setAttribute('type', 'button');
+    deleteButton.setAttribute('value', '🗑️');
+    deleteButton.setAttribute('title', 'Delete this');
+    deleteButton.addEventListener('click', (event) => {
+        event.target.closest(".group").parentNode.removeChild(event.target.closest(".group"));
     });
     
-    var newLogicButton = document.createElement('input');
-    newLogicButton.setAttribute('type', 'button');
-    newLogicButton.setAttribute('value', '+Grp');
-    newLogicButton.addEventListener('click', (event) => {
-        event.target.closest(".group").appendChild(createLogicalGroup('or'));
-    });
-    
-    formDiv.appendChild(newReqButton);
-    formDiv.appendChild(newLogicButton);
+
+    formDiv.appendChild(deleteButton);
     return formDiv;
 }
 
 function createTagForm() {
+    
     var formDiv = document.createElement('div');
     formDiv.classList.add('tag-form');
     
@@ -79,29 +96,12 @@ function createTagForm() {
 }
 
 
+let query = new QuerySubstring(0);
 
-
-
-function parseStructureToQueryString(group, depth) {
-    var queryString = "";
-    
-    // Base: Tag requirement
-    if (group.classList.contains('requirement-tag')) {
-        queryString += parseRequirementTag(group);
-    } else if (group.classList.contains('requirement-example')) {
-        // pass
-    }
-    
-    return queryString;
-}
-    
-function parseRequirementTag(group) {
-    var result = "";
-    // TODO: nwr
-    result += 'nwr["' + group.querySelector('input[name="key"]') + '"';
-    // TODO: Equality type
-    result += '=';
-    result += '"' + group.querySelector('input[name="value"]') + '"' + ']';
-    
-    return result;
-}
+var buildButton = document.getElementById("build-query-button");
+var resultsArea = document.getElementById("query-results");
+buildButton.addEventListener('click', (event) => {
+    query.clear();
+    parseStructureToQueryString(rootGroup, query);
+    resultsArea.textContent = query.result;
+});
