@@ -6,9 +6,6 @@
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="/style/style.css">
     <link rel="icon" href="/assets/favicon.ico">
-    {% for css in page.extra_css %}
-    <link rel="stylesheet" href="{{ css }}">
-    {% endfor %}
   </head>
   <body>
     {% include nav.html %}

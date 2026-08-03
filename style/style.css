@@ -27,16 +27,11 @@
   margin: 0;
 }
 
-body>* {
-  margin-left: 1em;
-  margin-right: 1em;
-}
-
 body {
   max-width: 100ch;
   line-height: 1.6;
   font-size: 1em;
-  padding: 0;
+  padding: 0 1em;
   margin: 0 auto;
   margin-bottom: 4em;
   
@@ -80,7 +75,7 @@ pre.codeblock, pre.code {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   font-size: 1em;
   font-family: "SourceCodeProBlack";
   font-weight: bold;
@@ -106,14 +101,6 @@ pre.codeblock, pre.code {
   text-decoration: none;
   border-radius: 8px;
   letter-spacing: 0.04rem;
-}
-
-.navbar *:nth-child(4) {
-  margin-right: 40%;
-}
-
-.navbar *:nth-child(5) {
-  margin-left: -39%;
 }
 
 .navbar a:hover,
@@ -288,12 +275,6 @@ img {
 /*
  ============== NOTES ============
 */
-
-.warning {
-  border-radius: 4px;
-  border: 1px solid #9b9915;
-  background: #e0dd4c;
-}
 
 .note {
   border-radius: 6px;

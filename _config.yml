@@ -11,9 +11,6 @@ defaults:
       path: "_trips"
     values:
       layout: trip
-      extra_css:
-        - /style/gpx.css
-        - https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css
   - scope:
       path: "_notes"
     values:
