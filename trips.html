@@ -1,40 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trips</title>
-    <link rel="stylesheet" href="/style/style.css">
-    <link rel="icon" href="/assets/favicon.ico">
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/index.html" class="logo">JC</a>
-      <a href="/index.html">Index</a>
-      <a href="/projects.html">Projects</a>
-      <a href="/trips.html" class="active">Trips</a>
-      <a href="/notes.html">Notes</a>
-      <a href="/about.html">Jacob</a>
-    </nav>
-    <h1>Trips</h1>
-    <ul class="navlist">
-      <li><a href="/trips/2025-07-11.html">2025-07-11 Sawtooth Range</a></li>
-      <li><a href="/trips/2023-08-05.html">2023-08-05 Wind Rivers, WY</a> - A WRHR attempt made southern range loop</li>
-      <li><a href="/trips/2023-07-21.html">2023-07-21 Southwestern Yellowstone</a></li>
-      <li><a href="/trips/2023-07-04.html">2023-07-04 Sawtooths and Boise, ID</a></li>
-      <li><a href="/trips/2023-04-07.html">2023-04-07 Capitol Reef NP, UT</a> - Weekender in the desert</li>
-      <li><a href="/trips/2023-03-04.html">2023-03-04 Moab, UT</a> - Canyonlands and Arches for Spring Break</li>
-      <li><a href="/trips/2022-11-19.html">2022-11-19 Kolkata, India</a> - Visit family and wedding celebrations</li>
-      <li><a href="/trips/2022-08-22.html">2022-08-22 Paria/Buckskin, UT/AZ</a> - Slot canyons and desert on the UT/AZ border</li>
-      <li><a href="/trips/2022-07-22.html">2022-07-22 Glacier NP, MT</a> - Amazing views in one of the greatest national parks</li>
-      <li><a href="/trips/2022-07-15.html">2022-07-15 Swift Creek, Gros Ventre, WY</a> - Amazing experience and terrain in the high country</li>
-      <li><a href="/trips/2022-07-02.html">2022-07-02 Open Canyon, Teton NP, WY</a> - Short yet beautiful backpacking trip</li>
-      <li><a href="/trips/2021-12-31.html">2021-12-31 Moab, UT</a> - Trip cut short due to rare heavy snowstorm</li>
-      <li>2021-xx-xx Stump Hollow, UT - Overnighter snowshoeing trip with Brady</li>
-      <li>2021-08-28 Bears Ears Adventure Race, CO - Crazy orienteering challenge race</li>
-      <li>2021-08-10 Yosemite, CA - A few nights during the off season</li>
-      <li>2021-08-07 Teton NP, WY</li>
-      <li>2021-07-23 Teton NP, WY</li>
-    </ul>
-  </body>
-</html>
+---
+layout: default
+title: Trips
+nav: trips
+---
+<h1>Trips</h1>
+<ul class="navlist cols threecols">
+  {% for trip in site.trips reversed %}
+    <li><a href="{{ trip.url }}">{{ trip.title }}</a></li>
+  {% endfor %}
+</ul>

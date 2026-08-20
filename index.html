@@ -1,80 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-    <link rel="stylesheet" href="/style/style.css">
-    <link rel="icon" href="/assets/favicon.ico">
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/index.html" class="logo">JC</a>
-      <a href="/index.html" class="active">Index</a>
-      <a href="/projects.html">Projects</a>
-      <a href="/trips.html">Trips</a>
-      <a href="/notes.html">Notes</a>
-      <a href="/about.html">Jacob</a>
-    </nav>
-    <!--
-    <div class="note weak">Click on a heading to get a list with more detail.</div>
-    -->
-    <div class="navlist cols threecols">
-      <div>
-        <h2>Projects</h2>
-        <ul>
-          <li><a href="/projects/tent.html">Tent</a></li>
-          <li><a href="/projects/bikes.html">Bikes</a></li>
-          <li><a href="/projects/osm/lanebuilder.html">LaneBuilder</a></li>
-          <li><a href="/projects/osm/usu_parking.html">Park Hour</a></li>
-          <li><a href="/projects/cycle_logan.html">Cycling Logan</a></li>
-          <li><a href="https://github.com/lint3/cachevalley-address-import-osm">OSM Addr Import</a></li>
-          <li><a href="/projects/rr/rr.html">Site Demo</a></li>
-          <li><a href="/projects/st-a410.html">ST-A410</a></li>
-          <li><a href="/projects/terrain_model.html">Print or Cut Real Terrain</a></li>
-          <li><a href="/projects.html">More -&gt;</a></li>
-        </ul>
-      </div>
-      
-      <div>
-        <h2>Trips</h2>
-        <ul>
-          <li><a href="/trips/peaks.html">Peaks Bagged</a></li>
-          <li><a href="/trips/2023-08-05.html">2023-08-05 Wind Rivers, WY</a></li>
-          <li><a href="/trips/2023-07-21.html">2023-07-21 SW Yellowstone, WY</a></li>
-          <li><a href="/trips/2023-07-04.html">2023-07-04 Sawtooths, ID</a></li>
-          <li><a href="/trips/2023-04-07.html">2023-04-07 Capitol Reef NP, UT</a></li>
-          <li><a href="/trips/2023-03-04.html">2023-03-04 Moab, UT</a></li>
-          <li><a href="/trips/2022-11-19.html">2022-11-19 Kolkata, India</a></li>
-          <li><a href="/trips/2022-08-22.html">2022-08-22 Paria/Buckskin, UT/AZ</a></li>
-          <li><a href="/trips/2022-07-22.html">2022-07-22 Glacier, MT</a></li>
-          <li><a href="/trips/2022-07-15.html">2022-07-15 Swift Creek, WY</a></li>
-          <li><a href="/trips/2022-07-02.html">2022-07-02 Open Canyon, WY</a></li>
-          <li><a href="/trips/2021-12-31.html">2021-12-31 Moab, UT</a></li>
-          <li><a href="/trips.html">More -&gt;</a></li>
-        </ul>
-      </div>
-      
-      <div>
-        <h2>Notes</h2>
-        <ul>
-          <li><a href="/notes/gear_checklist.html">Gear Checklist</a></li>
-          <li><a href="/notes/tidbits.html">HTML/CSS Tidbits</a></li>
-          <li><a href="/notes/handy.html">Handy Tools</a></li>
-          <li><a href="/notes/map_notes.html">Map Notes</a></li>
-          <li><a href="/notes/nice_software.html">Nice Software</a></li>
-          <li><a href="/notes/backpack.html">Gear Shakedown</a></li>
-          <li><a href="/notes/camping_recipes.html">Backpacking Recipes</a></li>
-          <li><a href="/notes/car_camping_food.html">Car Camping Recipes</a></li>
-          <li><a href="/notes/bookmarks.html">Bookmarks</a></li>
-          <li><a href="/notes/opinions.html">Opinions</a></li>
-          <li><a href="/notes.html">More -&gt;</a></li>
-        </ul>
-      </div>
-      
-    </div>
-    <!--
-    <a href="quick.html"><div class="right-link">Quick Access ➡️</div></a>
-    -->
-  </body>
-</html>
+---
+layout: default
+title: Index
+nav: index
+---
+<div class="navlist cols threecols">
+  <div>
+    <h2>Projects</h2>
+    <ul>
+      {% for project in site.projects %}
+        {% if project.highlighted %}
+          <li><a href="{{ project.url }}">{{ project.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+      <li><a href="/projects.html">More -&gt;</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h2>Trips</h2>
+    <ul>
+      {% for trip in site.trips reversed %}
+        {% if trip.highlighted %}
+          <li><a href="{{ trip.url }}">{{ trip.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+      <li><a href="/trips.html">More -&gt;</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h2>Notes</h2>
+    <ul>
+      {% for note in site.notes %}
+        {% if note.highlighted %}
+          <li><a href="{{ note.url }}">{{ note.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+      <li><a href="/notes.html">More -&gt;</a></li>
+    </ul>
+  </div>
+</div>

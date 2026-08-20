@@ -1,8 +1,8 @@
 <nav class="navbar">
   <a href="/index.html" class="logo">JC</a>
-  <a href="/index.html">Index</a>
-  <a href="/projects.html">Projects</a>
-  <a href="/trips.html">Trips</a>
-  <a href="/notes.html">Notes</a>
-  <a href="/about.html">Jacob</a>
+  <a href="/index.html" {% if page.nav == 'index' %}class="active"{% endif %}>Index</a>
+  <a href="/projects.html" {% if page.nav == 'projects' %}class="active"{% endif %}>Projects</a>
+  <a href="/trips.html" {% if page.nav == 'trips' %}class="active"{% endif %}>Trips</a>
+  <a href="/notes.html" {% if page.nav == 'notes' %}class="active"{% endif %}>Notes</a>
+  <a href="/about.html" {% if page.nav == 'about' %}class="active"{% endif %}>Jacob</a>
 </nav>

@@ -1,37 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes</title>
-    <link rel="stylesheet" href="/style/style.css">
-    <link rel="icon" href="/assets/favicon.ico">
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/index.html" class="logo">JC</a>
-      <a href="/index.html">Index</a>
-      <a href="/projects.html">Projects</a>
-      <a href="/trips.html">Trips</a>
-      <a href="/notes.html" class="active">Notes</a>
-      <a href="/about.html">Jacob</a>
-    </nav>
-    <h1>Notes</h1>
-    <ul class="navlist cols twocols">
-      <li><a href="/notes/gear_checklist.html">Gear Checklist</a></li>
-      <li><a href="/notes/pizza.html">Pizza Recipe</a></li>
-      <li><a href="/notes/tidbits.html">HTML/CSS Tidbits</a></li>
-      <li><a href="/notes/handy.html">Handy Tools</a> - Mostly web stuff</li>
-      <li><a href="/notes/map_notes.html">Map Notes</a> - Handy web map items</li>
-      <li><a href="/notes/nice_software.html">Nice Software</a> - What I use and recommend</li>
-      <li><a href="/notes/backpack.html">Gear Shakedown</a> - What I use and recommend</li>
-      <li><a href="/notes/camping_recipes.html">Backpacking Recipes</a></li>
-      <li><a href="/notes/car_camping_food.html">Car Camping Recipes</a></li>
-      <li><a href="/notes/bookmarks.html">Bookmarks</a></li>
-      <li><a href="/notes/no_bs_web.html">The BS-Free Web</a></li>
-      <li><a href="/notes/opinions.html">My Opinions</a></li>
-      <li><a href="/notes/intl_gear_checklist.html">Travel Gear Checklist</a></li>
-      <li><a href="/notes/tips_general.html">J's Tips</a></li>
-    </ul>
-  </body>
-</html>
+---
+layout: default
+title: Notes
+nav: notes
+---
+<h1>Notes</h1>
+<ul class="navlist cols threecols">
+  {% for note in site.notes %}
+    <li><a href="{{ note.url }}">{{ note.title }}</a></li>
+  {% endfor %}
+</ul>
