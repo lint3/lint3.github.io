@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Flag Quiz</title>
 <style>
-  body{font-family:system-ui,sans-serif;max-width:34rem;margin:4rem auto;text-align:center;padding:0 1rem}
+  body{font-family:system-ui,sans-serif;max-width:48rem;margin:2rem auto;text-align:center;padding:0 1rem}
   #prompt{margin:1.5rem 0}
   #prompt.flag{font-size:5rem}
   #prompt.name{font-size:2rem;font-weight:600}
   #options{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1rem 0}
-  #options button{padding:.6rem 1rem;font-size:1.25rem;cursor:pointer;border:1px solid #ccc;border-radius:6px;background:#f5f5f5}
+  #options button{padding:.6rem 1rem;cursor:pointer;border:1px solid #ccc;border-radius:6px;background:#f5f5f5}
   #options button.correct{background:#bff0bf;border-color:#2e7d32}
   #options button.wrong{background:#f0bfbf;border-color:#c62828}
   #feedback{min-height:1.5em;font-weight:600}
@@ -19,12 +19,13 @@
 </style>
 
 <style>
-  #options button[data-code]{font-size:5rem}
+  body:has(#prompt.flag)#options.button{font-size:5rem}
+  body:has(#prompt.name)#options.button{font-size:1rem}
 </style>
 
 </head>
 <body>
-<h1>Flag Quiz</h1>
+<h3>Flag Quiz</h1>
 <p id="stats"></p>
 <div id="prompt"></div>
 <div id="options"></div>
