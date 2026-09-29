@@ -16,16 +16,13 @@
   #feedback{min-height:1.5em;font-weight:600}
   #stats{color:#555}
   #reset{margin-top:2rem;font-size:.8rem;color:#999;background:none;border:none;cursor:pointer;text-decoration:underline}
-</style>
-
-<style>
   body:has(#prompt.flag) #options button{font-size:1rem}
   body:has(#prompt.name) #options button{font-size:5rem}
 </style>
 
 </head>
 <body>
-<h3>Flag Quiz</h1>
+<h1>Flag Quiz</h1>
 <p id="stats"></p>
 <div id="prompt"></div>
 <div id="options"></div>
@@ -85,13 +82,15 @@ const stats = Object.assign({ total: 0, correct: 0, streak: 0, best: 0 },
 
 const CARDS_KEY = "flagQuizCards";
 const MAX_BOX = 5;
-const newCard = () => ({ box: 0, correct: 0, wrong: 0, rtTotal: 0, rtCount: 0 });
+const newCard = () => ({ box: 0, rtTotal: 0, rtCount: 0 });
 const storedCards = JSON.parse(localStorage.getItem(CARDS_KEY) || "{}");
 const cards = {};
-for (const c of COUNTRIES) cards[c[1]] = Object.assign(newCard(), storedCards[c[1]] || {});
+for (const c of COUNTRIES) {
+  const s = storedCards[c[1]] || {};
+  cards[c[1]] = { box: s.box ?? 0, rtTotal: s.rtTotal ?? 0, rtCount: s.rtCount ?? 0 };
+}
 
 let current = null;
-let questionStart = 0;
 
 const $ = id => document.getElementById(id);
 const shuffle = a => a.sort(() => Math.random() - .5);
@@ -105,10 +104,10 @@ function save() {
 function renderStats() {
   const pct = stats.total ? Math.round(100 * stats.correct / stats.total) : 0;
   let rtTotal = 0, rtCount = 0, mastered = 0;
-  for (const code in cards) {
-    rtTotal += cards[code].rtTotal;
-    rtCount += cards[code].rtCount;
-    if (cards[code].box >= MAX_BOX) mastered++;
+  for (const card of Object.values(cards)) {
+    rtTotal += card.rtTotal;
+    rtCount += card.rtCount;
+    if (card.box >= MAX_BOX) mastered++;
   }
   const avg = rtCount ? (rtTotal / rtCount / 1000).toFixed(1) : "—";
   $("stats").textContent =
@@ -130,8 +129,7 @@ function newQuestion() {
   const country = pickCountry();
   const opts = new Set([country]);
   while (opts.size < 4) opts.add(COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)]);
-  current = { country, options: shuffle([...opts]), nameToFlag: Math.random() < .5 };
-  questionStart = Date.now();
+  current = { country, options: shuffle([...opts]), nameToFlag: Math.random() < .5, start: Date.now() };
 
   const prompt = $("prompt");
   if (current.nameToFlag) {
@@ -144,32 +142,30 @@ function newQuestion() {
 
   $("feedback").textContent = "";
   $("next").hidden = true;
-  const box = $("options");
-  box.innerHTML = "";
+  const container = $("options");
+  container.innerHTML = "";
   for (const opt of current.options) {
     const b = document.createElement("button");
     b.textContent = current.nameToFlag ? flag(opt[1]) : opt[0];
     b.dataset.code = opt[1];
     b.onclick = () => answer(opt);
-    box.appendChild(b);
+    container.appendChild(b);
   }
 }
 
 function answer(opt) {
   const correct = opt[1] === current.country[1];
   const card = cards[current.country[1]];
-  card.rtTotal += Date.now() - questionStart;
+  card.rtTotal += Date.now() - current.start;
   card.rtCount++;
   stats.total++;
   if (correct) {
     card.box = Math.min(card.box + 1, MAX_BOX);
-    card.correct++;
     stats.correct++;
     stats.streak++;
     stats.best = Math.max(stats.best, stats.streak);
   } else {
     card.box = Math.max(card.box - 1, 0);
-    card.wrong++;
     stats.streak = 0;
   }
   save();
@@ -188,7 +184,7 @@ function answer(opt) {
 $("next").onclick = newQuestion;
 $("reset").onclick = () => {
   Object.assign(stats, { total: 0, correct: 0, streak: 0, best: 0 });
-  for (const code in cards) Object.assign(cards[code], newCard());
+  for (const card of Object.values(cards)) Object.assign(card, newCard());
   save();
   newQuestion();
 };
