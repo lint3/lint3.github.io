@@ -30,6 +30,13 @@
 <p><button id="reset">Reset stats</button></p>
 
 <script>
+// One-time reset to version 2: start fresh (drop old box/mastery/stats data).
+if (localStorage.getItem("flagQuizVersion") !== "2") {
+  localStorage.removeItem("flagQuizStats");
+  localStorage.removeItem("flagQuizCards");
+  localStorage.removeItem("flagQuizMatrix");
+  localStorage.setItem("flagQuizVersion", "2");
+}
 const COUNTRIES = [
 ["Afghanistan","AF"],["Albania","AL"],["Algeria","DZ"],["Andorra","AD"],["Angola","AO"],
 ["Antigua and Barbuda","AG"],["Argentina","AR"],["Armenia","AM"],["Australia","AU"],["Austria","AT"],
@@ -80,25 +87,23 @@ const stats = Object.assign({ total: 0, correct: 0, streak: 0, best: 0 },
   JSON.parse(localStorage.getItem(KEY) || "{}"));
 
 const MATRIX_KEY = "flagQuizMatrix";
-const OLD_CARDS_KEY = "flagQuizCards";
 const MASTERED = 0.9;
+const EPS = 0.25;   // exploration rate for distractor sampling
+const BOOST = 2;    // how strongly a confusable partner raises question frequency
 const N = COUNTRIES.length;
 const codeIndex = new Map(COUNTRIES.map((c, i) => [c[1], i]));
 
 // N×N matrix. Diagonal = mastery; upper triangle (i<j) = flag→name confusion;
 // lower triangle (i>j) = name→flag confusion. Off-diagonal seeds at 0.5 (unknown).
 const storedMatrix = JSON.parse(localStorage.getItem(MATRIX_KEY) || "null");
-const oldCards = JSON.parse(localStorage.getItem(OLD_CARDS_KEY) || "{}");
 const matrix = [];
 if (Array.isArray(storedMatrix) && storedMatrix.length === N &&
     storedMatrix.every(r => Array.isArray(r) && r.length === N)) {
   for (const r of storedMatrix) matrix.push(r.slice());
 } else {
-  // First run (or schema change): migrate old Leitner boxes to diagonal mastery.
   for (let r = 0; r < N; r++) {
     const row = new Array(N).fill(0.5);
-    const b = oldCards[COUNTRIES[r][1]] || {};
-    row[r] = (typeof b.box === "number" ? b.box : 0) / 5;
+    row[r] = 0;  // mastery starts at 0
     matrix.push(row);
   }
 }
@@ -137,28 +142,62 @@ function renderStats() {
     `Score: ${stats.correct}/${stats.total} (${pct}%) · Streak: ${stats.streak} · Best: ${stats.best} · Mastered: ${mastered}/${N}`;
 }
 
-function pickCountry() {
+function pickCountryIndex(ntf) {
   const weights = new Array(N);
   let total = 0;
   for (let i = 0; i < N; i++) {
-    weights[i] = 1 - matrix[i][i];
+    let topConf = 0;
+    for (let k = 0; k < N; k++) {
+      if (k === i) continue;
+      const [r, c] = confusionCell(i, k, ntf);
+      if (matrix[r][c] > topConf) topConf = matrix[r][c];
+    }
+    weights[i] = (1 - matrix[i][i]) + BOOST * Math.max(0, topConf - 0.5);
     total += weights[i];
   }
   let r = Math.random() * total;
   for (let i = 0; i < N; i++) {
     r -= weights[i];
-    if (r <= 0) return COUNTRIES[i];
+    if (r <= 0) return i;
   }
-  return COUNTRIES[N - 1];
+  return N - 1;
+}
+
+function sampleDistractors(i, ntf, count) {
+  const ranked = [];
+  for (let k = 0; k < N; k++) {
+    if (k === i) continue;
+    const [r, c] = confusionCell(i, k, ntf);
+    ranked.push({ k, v: matrix[r][c] });
+  }
+  ranked.sort((a, b) => b.v - a.v);
+
+  const out = [];
+  const used = new Set([i]);
+  for (let slot = 0; slot < count; slot++) {
+    let k = null;
+    if (Math.random() >= EPS) {
+      for (const cand of ranked) {
+        if (!used.has(cand.k) && cand.v > 0.5) { k = cand.k; break; }
+      }
+    }
+    if (k === null) {
+      do { k = Math.floor(Math.random() * N); } while (used.has(k));
+    }
+    used.add(k);
+    out.push(k);
+  }
+  return out;
 }
 
 function newQuestion() {
-  const country = pickCountry();
-  const i = codeIndex.get(country[1]);
+  const ntf = Math.random() < .5;
+  const i = pickCountryIndex(ntf);
+  const country = COUNTRIES[i];
   const numOpts = matrix[i][i] >= MASTERED ? 10 : 4;
-  const opts = new Set([country]);
-  while (opts.size < numOpts) opts.add(COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)]);
-  current = { country, options: shuffle([...opts]), nameToFlag: Math.random() < .5 };
+  const opts = [country];
+  for (const k of sampleDistractors(i, ntf, numOpts - 1)) opts.push(COUNTRIES[k]);
+  current = { country, options: shuffle(opts), nameToFlag: ntf };
 
   const prompt = $("prompt");
   if (current.nameToFlag) {
