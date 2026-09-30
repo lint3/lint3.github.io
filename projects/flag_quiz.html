@@ -18,6 +18,7 @@
   #reset{margin-top:2rem;font-size:.8rem;color:#999;background:none;border:none;cursor:pointer;text-decoration:underline}
   body:has(#prompt.flag) #options button{font-size:1rem}
   body:has(#prompt.name) #options button{font-size:5rem}
+  #matrix{position:fixed;right:8px;bottom:8px;border:1px solid #999;background:#fff;image-rendering:pixelated;pointer-events:none;z-index:10}
 </style>
 
 </head>
@@ -28,6 +29,7 @@
 <p id="feedback"></p>
 <button id="next" hidden>Next question</button>
 <p><button id="reset">Reset stats</button></p>
+<canvas id="matrix" title="Mastery (diagonal) / confusion (off-diagonal), white = high"></canvas>
 
 <script>
 // One-time reset to version 2: start fresh (drop old box/mastery/stats data).
@@ -128,10 +130,32 @@ const decConfusion = (a, b, ntf) => {
   matrix[r][c] *= 0.95;
 };
 
+// Matrix visualization (grayscale, each cell displayed at 2×2px).
+const mcanvas = $("matrix");
+mcanvas.width = N;
+mcanvas.height = N;
+mcanvas.style.width = 2 * N + "px";
+mcanvas.style.height = 2 * N + "px";
+const mctx = mcanvas.getContext("2d");
+
+function renderMatrix() {
+  const img = mctx.createImageData(N, N);
+  for (let r = 0; r < N; r++) {
+    for (let c = 0; c < N; c++) {
+      const v = Math.round(matrix[r][c] * 255);
+      const idx = (r * N + c) * 4;
+      img.data[idx] = img.data[idx + 1] = img.data[idx + 2] = v;
+      img.data[idx + 3] = 255;
+    }
+  }
+  mctx.putImageData(img, 0, 0);
+}
+
 function save() {
   localStorage.setItem(KEY, JSON.stringify(stats));
   localStorage.setItem(MATRIX_KEY, JSON.stringify(matrix));
   renderStats();
+  renderMatrix();
 }
 
 function renderStats() {
@@ -273,6 +297,7 @@ $("reset").onclick = () => {
 };
 
 renderStats();
+renderMatrix();
 newQuestion();
 </script>
 </body>
