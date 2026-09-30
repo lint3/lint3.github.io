@@ -79,14 +79,28 @@ const KEY = "flagQuizStats";
 const stats = Object.assign({ total: 0, correct: 0, streak: 0, best: 0 },
   JSON.parse(localStorage.getItem(KEY) || "{}"));
 
-const CARDS_KEY = "flagQuizCards";
-const MAX_BOX = 5;
-const newCard = () => ({ box: 0 });
-const storedCards = JSON.parse(localStorage.getItem(CARDS_KEY) || "{}");
-const cards = {};
-for (const c of COUNTRIES) {
-  const s = storedCards[c[1]] || {};
-  cards[c[1]] = { box: s.box ?? 0 };
+const MATRIX_KEY = "flagQuizMatrix";
+const OLD_CARDS_KEY = "flagQuizCards";
+const MASTERED = 0.9;
+const N = COUNTRIES.length;
+const codeIndex = new Map(COUNTRIES.map((c, i) => [c[1], i]));
+
+// N×N matrix. Diagonal = mastery; upper triangle (i<j) = flag→name confusion;
+// lower triangle (i>j) = name→flag confusion. Off-diagonal seeds at 0.5 (unknown).
+const storedMatrix = JSON.parse(localStorage.getItem(MATRIX_KEY) || "null");
+const oldCards = JSON.parse(localStorage.getItem(OLD_CARDS_KEY) || "{}");
+const matrix = [];
+if (Array.isArray(storedMatrix) && storedMatrix.length === N &&
+    storedMatrix.every(r => Array.isArray(r) && r.length === N)) {
+  for (const r of storedMatrix) matrix.push(r.slice());
+} else {
+  // First run (or schema change): migrate old Leitner boxes to diagonal mastery.
+  for (let r = 0; r < N; r++) {
+    const row = new Array(N).fill(0.5);
+    const b = oldCards[COUNTRIES[r][1]] || {};
+    row[r] = (typeof b.box === "number" ? b.box : 0) / 5;
+    matrix.push(row);
+  }
 }
 
 let current = null;
@@ -94,36 +108,54 @@ let current = null;
 const $ = id => document.getElementById(id);
 const shuffle = a => a.sort(() => Math.random() - .5);
 
+// Confusion cells keyed by (unordered pair, mode): name→flag (ntf=true) below the
+// diagonal, flag→name above it.
+const confusionCell = (a, b, ntf) => {
+  const lo = Math.min(a, b), hi = Math.max(a, b);
+  return ntf ? [hi, lo] : [lo, hi];
+};
+const incConfusion = (a, b, ntf) => {
+  const [r, c] = confusionCell(a, b, ntf);
+  matrix[r][c] += 0.25 * (1 - matrix[r][c]);
+};
+const decConfusion = (a, b, ntf) => {
+  const [r, c] = confusionCell(a, b, ntf);
+  matrix[r][c] *= 0.95;
+};
+
 function save() {
   localStorage.setItem(KEY, JSON.stringify(stats));
-  localStorage.setItem(CARDS_KEY, JSON.stringify(cards));
+  localStorage.setItem(MATRIX_KEY, JSON.stringify(matrix));
   renderStats();
 }
 
 function renderStats() {
   const pct = stats.total ? Math.round(100 * stats.correct / stats.total) : 0;
   let mastered = 0;
-  for (const card of Object.values(cards)) {
-    if (card.box >= MAX_BOX) mastered++;
-  }
+  for (let i = 0; i < N; i++) if (matrix[i][i] >= MASTERED) mastered++;
   $("stats").textContent =
-    `Score: ${stats.correct}/${stats.total} (${pct}%) · Streak: ${stats.streak} · Best: ${stats.best} · Mastered: ${mastered}/${COUNTRIES.length}`;
+    `Score: ${stats.correct}/${stats.total} (${pct}%) · Streak: ${stats.streak} · Best: ${stats.best} · Mastered: ${mastered}/${N}`;
 }
 
 function pickCountry() {
+  const weights = new Array(N);
   let total = 0;
-  for (const c of COUNTRIES) total += Math.pow(.5, cards[c[1]].box);
-  let r = Math.random() * total;
-  for (const c of COUNTRIES) {
-    r -= Math.pow(.5, cards[c[1]].box);
-    if (r <= 0) return c;
+  for (let i = 0; i < N; i++) {
+    weights[i] = 1 - matrix[i][i];
+    total += weights[i];
   }
-  return COUNTRIES[COUNTRIES.length - 1];
+  let r = Math.random() * total;
+  for (let i = 0; i < N; i++) {
+    r -= weights[i];
+    if (r <= 0) return COUNTRIES[i];
+  }
+  return COUNTRIES[N - 1];
 }
 
 function newQuestion() {
   const country = pickCountry();
-  const numOpts = cards[country[1]].box >= MAX_BOX ? 10 : 4;
+  const i = codeIndex.get(country[1]);
+  const numOpts = matrix[i][i] >= MASTERED ? 10 : 4;
   const opts = new Set([country]);
   while (opts.size < numOpts) opts.add(COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)]);
   current = { country, options: shuffle([...opts]), nameToFlag: Math.random() < .5 };
@@ -151,19 +183,30 @@ function newQuestion() {
 }
 
 function answer(opt) {
-  const correct = opt[1] === current.country[1];
-  const card = cards[current.country[1]];
+  const i = codeIndex.get(current.country[1]);
+  const j = codeIndex.get(opt[1]);
+  const correct = j === i;
+  const ntf = current.nameToFlag;
+
   stats.total++;
   if (correct) {
-    card.box = Math.min(card.box + 1, MAX_BOX);
+    matrix[i][i] += 0.05 * (1 - matrix[i][i]);
     stats.correct++;
     stats.streak++;
     stats.best = Math.max(stats.best, stats.streak);
+    for (const o of current.options) {
+      const k = codeIndex.get(o[1]);
+      if (k !== i) decConfusion(i, k, ntf);
+    }
   } else {
-    const downgrade = c => { c.box = Math.max(c.box - (c.box >= MAX_BOX ? 3 : 1), 0); };
-    downgrade(card);
-    downgrade(cards[opt[1]]);
+    matrix[i][i] *= 0.8;   // mastery down (target): −20%
+    matrix[j][j] *= 0.95;  // mastery down (chosen): −5%
     stats.streak = 0;
+    incConfusion(i, j, ntf);
+    for (const o of current.options) {
+      const k = codeIndex.get(o[1]);
+      if (k !== i && k !== j) decConfusion(i, k, ntf);
+    }
   }
   save();
 
@@ -172,16 +215,20 @@ function answer(opt) {
     if (b.dataset.code === current.country[1]) b.classList.add("correct");
     else if (b.dataset.code === opt[1]) b.classList.add("wrong");
   }
+  const mastery = Math.round(matrix[i][i] * 100);
   $("feedback").textContent = correct
-    ? `Correct! ${current.country[0]} ${flag(current.country[1])} · Box ${card.box}`
-    : `Nope — it was ${current.country[0]} ${flag(current.country[1])} · Box ${card.box}`;
+    ? `Correct! ${current.country[0]} ${flag(current.country[1])} · Mastery ${mastery}%`
+    : `Nope — it was ${current.country[0]} ${flag(current.country[1])} · Mastery ${mastery}%`;
   $("next").hidden = false;
 }
 
 $("next").onclick = newQuestion;
 $("reset").onclick = () => {
   Object.assign(stats, { total: 0, correct: 0, streak: 0, best: 0 });
-  for (const card of Object.values(cards)) Object.assign(card, newCard());
+  for (let r = 0; r < N; r++) {
+    matrix[r].fill(0.5);
+    matrix[r][r] = 0;
+  }
   save();
   newQuestion();
 };
