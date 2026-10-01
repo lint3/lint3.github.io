@@ -18,7 +18,7 @@
   #reset{margin-top:2rem;font-size:.8rem;color:#999;background:none;border:none;cursor:pointer;text-decoration:underline}
   body:has(#prompt.flag) #options button{font-size:1rem}
   body:has(#prompt.name) #options button{font-size:5rem}
-  #matrix{position:fixed;right:8px;bottom:8px;border:1px solid #999;background:#fff;image-rendering:pixelated;pointer-events:none;z-index:10}
+  #matrix{display:block;margin:2rem auto;border:1px solid #999;background:#fff;image-rendering:pixelated}
 </style>
 
 </head>
@@ -134,8 +134,6 @@ const decConfusion = (a, b, ntf) => {
 const mcanvas = $("matrix");
 mcanvas.width = N;
 mcanvas.height = N;
-mcanvas.style.width = 2 * N + "px";
-mcanvas.style.height = 2 * N + "px";
 const mctx = mcanvas.getContext("2d");
 
 function renderMatrix() {
